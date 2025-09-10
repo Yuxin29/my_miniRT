@@ -1,8 +1,6 @@
 NAME := miniRT
 CC := cc
 CFLAGS := -Wall -Wextra -Werror
-
-
 INCLUDES := -I includes -I libft -I MLX42/include
 
 SRC_DIR := src

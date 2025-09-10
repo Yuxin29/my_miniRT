@@ -32,7 +32,28 @@ t_vec3	vec_scalar(t_vec3 a, float scalar)
 	return (result);
 }
 
-t_vec3	vec_lemgth(t_vec3 a)
+float	vec_length(t_vec3 a)
 {
 	return (sqrt(a.x * a.x + a.y * a.y + a.z * a.z));
+}
+
+//normalizing a vector means dividing the vector by its length
+//in many calculations (lighting, direction, angles),
+//we care about direction only — not length.
+t_vec3	normalize(t_vec3 v)
+{
+	float	length;
+
+	length = vec_length(v);
+	if (length == 0)
+		return ((t_vec3){0, 0, 0});
+	return (vec_scalar(v, 1.0 / length));
+}
+
+//Vectors>0 point in similar direction
+//Vectors=0 are perpendicular (90°)
+//Vectors<0 point in opposite directions
+float	vec_dot(t_vec3 a, t_vec3 b)
+{
+	return (a.x * b.x + a.y * b.y + a.z * b.z);
 }
