@@ -18,7 +18,7 @@
 // ∗ R,G,B colors in range [0-255]: 255, 255, 255
 typedef struct s_a_light
 {
-    float   ratio;
+    char   *ratio; //should be float here
     int     r;
     int     g;
     int     b;
@@ -34,7 +34,7 @@ typedef struct s_a_light
 typedef struct s_camera
 {
     t_vec3   v_point;
-    float   fov;
+    char   *fov;    //should be float here
 }	t_camera;
 
 //======================== maybe also later ============================
@@ -81,9 +81,9 @@ typedef struct s_sphere
 
 typedef struct s_scene
 {
-    t_a_light   ambient_light;
-    t_camera    cam;
-    //t_light   light;
+    t_a_light   *ambient_light;
+    t_camera    *cam;
+    //t_light   *light;
     t_sphere    *sp;
     int         sp_nbr;
     //t_pl        *pl;
@@ -93,6 +93,17 @@ typedef struct s_scene
 }	t_scene;
 
 //parsing.c
-int parsing(int ac, char **av);
+t_scene *parsing(int ac, char **av);
+
+// parsing_line_1.c
+void get_a_light(char *line, t_scene *scene);
+void get_camera(char *line, t_scene *scene);
+void get_sphere(char *line, t_scene *scene);
+void get_light(char *line, t_scene *scene);
+void parsing_line(char *line, t_scene *scene);
+
+//parsing_line_2.c
+void get_plane(char *line, t_scene *scene);
+void get_cylinder(char *line, t_scene *scene);
 
 #endif

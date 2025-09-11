@@ -1,21 +1,6 @@
 #include "miniRT.h"
 #include "parsing.h"
 
-void ft_free_scene(t_scene *scene)
-{
-    if (!scene)
-        return;
-    // Free spheres array if it exists
-    if (scene->sp)
-    {
-        free(scene->sp);
-        scene->sp = NULL;
-        scene->sp_nbr = 0;
-    }
-    // free *pl and *cy later
-    free(scene);
-}
-
 //check if each line is valid,
 //it has to start with the 6 identifies, it can be empty line
 //return 0 as error and 1 as valid line
@@ -25,17 +10,17 @@ static int validating_identifier(char *line)
 		return (0);
 	if (ft_isspace(line[0]))
 		return (1);
-	else if (ft_strncmp(linem "A ", 2) == 0)
+	else if (ft_strncmp(line, "A ", 2) == 0)
 		return (1);
-	else if (ft_strncmp(linem "C ", 2) == 0)
+	else if (ft_strncmp(line, "C ", 2) == 0)
 		return (1);
-	else if (ft_strncmp(linem "L ", 2) == 0)
+	else if (ft_strncmp(line, "L ", 2) == 0)
 		return (1);
-	else if (ft_strncmp(linem "sp ", 3) == 0)
+	else if (ft_strncmp(line, "sp ", 3) == 0)
 		return (1);
-	else if (ft_strncmp(linem "pl ", 3) == 0)
+	else if (ft_strncmp(line, "pl ", 3) == 0)
 		return (1);
-	else if (ft_strncmp(linem "cy ", 3) == 0)
+	else if (ft_strncmp(line, "cy ", 3) == 0)
 		return (1);
 	return (0);
 }
@@ -73,7 +58,7 @@ t_scene *parsing(int ac, char **av)
 		ft_putstr_fd("malloc scene failed", 1);
 		return (NULL);
 	}
-	ft_bzero(scene);
+	ft_bzero(scene, sizeof(t_scene));
 	line = get_next_line(fd);
 	while (line)
 	{
