@@ -15,7 +15,7 @@ MLX_REPO := https://github.com/codam-coding-college/MLX42.git
 MLX_DIR := MLX42
 MLX_LIB := $(MLX_DIR)/build/libmlx42.a
 MLX_FLAGS := -L$(MLX_DIR)/build -lmlx42 -ldl -lglfw -pthread -lm
-#-L linker search pathf
+#-L linker search path
 #-l link with library
 
 all: $(LIBFT_LIB) $(MLX_LIB) $(NAME)
