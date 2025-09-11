@@ -35,25 +35,16 @@ int	main(void)
 	mlx_terminate(mlx);
 	return (EXIT_SUCCESS);
 }
------------------
+--------------------
 #include <stdio.h>
 #include <math.h>
-#include "../include/minirt.h"
-
-// 你应包含 vector.c 中函数的声明
-t_vec3	vec_add(t_vec3 a, t_vec3 b);
-t_vec3	vec_sub(t_vec3 a, t_vec3 b);
-t_vec3	vec_scale(t_vec3 a, double scalar);
-double	vec_len(t_vec3 v);
-t_vec3	vec_normalize(t_vec3 v);
-double	vec_dot(t_vec3 a, t_vec3 b);
-t_vec3	vec_cross(t_vec3 a, t_vec3 b);
+#include "miniRT.h"
 
 void	test_vec_normalize()
 {
 	t_vec3	v = {3, 4, 0};
 	t_vec3	n = vec_normalize(v);
-	double	len = vec_len(n);
+	float	len = vec_len(n);
 	printf("test normalize: len = %.2f (expect 1.00)\n", len);
 }
 
