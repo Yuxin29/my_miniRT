@@ -5,7 +5,7 @@
 int main(int ac, char **av)
 {
 	t_scene	*scene;
-	
+
 	scene = parsing(ac, av);
 	if (!scene)
         return (-1);
@@ -18,7 +18,7 @@ int main(int ac, char **av)
 	mlx_image = mlx_new_image(mlx_window, 480, 720);
 	mlx_image_to_window(mlx_window, mlx_image, 0, 0);
 	mlx_put_pixel(mlx_image, 0, 0, 0xAABBCCAA);
-	mlx_loop(mlx_window);                       	
+	mlx_loop(mlx_window);
 	mlx_terminate(mlx_window);
 	return (0);
 }
@@ -45,4 +45,3 @@ int main(int ac, char **av)
 // 	mlx_terminate(mlx);
 // 	return (EXIT_SUCCESS);
 // }
-

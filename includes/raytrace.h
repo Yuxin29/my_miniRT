@@ -17,4 +17,6 @@ typedef struct s_hit_record
 
 }	t_hit_record;
 
+t_vec3	ray_at(t_ray a, float t);
+
 #endif

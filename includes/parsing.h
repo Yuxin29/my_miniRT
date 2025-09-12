@@ -88,7 +88,6 @@ typedef struct s_scene
 }	t_scene;
 
 //headers
-#include "get_next_line.h"
 #include "utils.h"
 
 //libs

@@ -27,7 +27,7 @@ static void print_camera(t_camera *c)
     printf("Camera:\n");
     printf("  position: x=%.2f y=%.2f z=%.2f\n", c->v_point.x, c->v_point.y, c->v_point.z);
     printf("  orientation: x=%.2f y=%.2f z=%.2f\n", c->v_orien.x, c->v_orien.y, c->v_orien.z);
-    printf("  FOV: %d\n", c->fov);
+    printf("  FOV: %f\n", c->fov);
 }
 
 static void print_sphere(t_sphere *s)
@@ -50,7 +50,7 @@ static void print_sphere(t_sphere *s)
 static int validating_identifier(char *line)
 {
 	int len;
-	
+
 	// printf("%s", "debug");
 	// if (!line)
 	// 	return 0;
@@ -120,7 +120,7 @@ t_scene *parsing(int ac, char **av)
     int		fd;
 	char	*line;
 	t_scene	*scene;
-	
+
 	if (!precheck_av(ac, av))
 		return (NULL);
 	fd = open(av[1], O_RDONLY);

@@ -37,8 +37,8 @@ bool	hit_sphere(t_ray ray, t_sphere *sphere, t_hit_record *rec)
 	float	t;
 
 	oc = vec_sub(ray.origin, ray.direction);
-	a = vec_doc(ray.direction, ray.direction);
-	b = 2.0 * vec_doc(oc, ray.direction);
+	a = vec_dot(ray.direction, ray.direction);
+	b = 2.0 * vec_dot(oc, ray.direction);
 	c = vec_dot(oc, oc) - sphere->radius * sphere->radius;
 	discriminant = b * b - 4 * a * c;
 	if (discriminant < 0)

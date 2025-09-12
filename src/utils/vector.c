@@ -6,7 +6,7 @@ t_vec3	vec_add(t_vec3 a, t_vec3 b)
 
 	result.x = a.x + b.x;
 	result.y = a.y + b.y;
-	result.z = a.z + a.z;
+	result.z = a.z + b.z;
 	return (result);
 }
 
@@ -16,7 +16,7 @@ t_vec3	vec_sub(t_vec3 a, t_vec3 b)
 
 	result.x = a.x - b.x;
 	result.y = a.y - b.y;
-	result.z = a.z - a.z;
+	result.z = a.z - b.z;
 	return (result);
 }
 
