@@ -14,34 +14,25 @@ void ft_print_scene(t_scene *scene)
 	printf("\n===== TEST PRINTING SCENE =====\n");
 
 	// Ambient Light
-	if (scene->ambient_light)
-	{
-		printf("Ambient Light:\n");
-		printf("  ratio: %.2f\n", scene->ambient_light->ratio);
-		printf("  color: R=%d G=%d B=%d\n",
-			scene->ambient_light->rgb.r,
-			scene->ambient_light->rgb.g,
-			scene->ambient_light->rgb.b);
-	}
-	else
-		printf("Ambient Light: (null)\n");
+	printf("Ambient Light:\n");
+	printf("  ratio: %.2f\n", scene->ambient_light.ratio);
+	printf("  color: R=%d G=%d B=%d\n",
+		scene->ambient_light.rgb.r,
+		scene->ambient_light.rgb.g,
+		scene->ambient_light.rgb.b);
 
 	// Camera
-	if (scene->cam)
-	{
-		printf("Camera:\n");
-		printf("  position: x=%.2f y=%.2f z=%.2f\n",
-			scene->cam->v_point.x,
-			scene->cam->v_point.y,
-			scene->cam->v_point.z);
-		printf("  orientation: x=%.2f y=%.2f z=%.2f\n",
-			scene->cam->v_orien.x,
-			scene->cam->v_orien.y,
-			scene->cam->v_orien.z);
-		printf("  FOV: %.2f\n", scene->cam->fov);
-	}
-	else
-		printf("Camera: (null)\n");
+
+	printf("Camera:\n");
+	printf("  position: x=%.2f y=%.2f z=%.2f\n",
+		scene->cam.v_point.x,
+		scene->cam.v_point.y,
+		scene->cam.v_point.z);
+	printf("  orientation: x=%.2f y=%.2f z=%.2f\n",
+		scene->cam.v_orien.x,
+		scene->cam.v_orien.y,
+		scene->cam.v_orien.z);
+	printf("  FOV: %.2f\n", scene->cam.fov);
 
 	// Spheres
 	cur = scene->sp;

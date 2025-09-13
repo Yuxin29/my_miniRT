@@ -42,14 +42,6 @@ static void ft_free_linked_objects(t_scene *scene)
 void ft_free_scene(t_scene *scene)
 {
     ft_free_linked_objects(scene);
-    if (!scene)
-        return;
-    if (scene->ambient_light)
-        free(scene->ambient_light);
-    if (scene->cam)
-        free(scene->cam);
-    // if (scene->light)  //not parsed yet
-    //     free(scene->light);
     if (scene->img && scene->mlx)
         mlx_delete_image(scene->mlx, scene->img);
     if (scene->mlx)

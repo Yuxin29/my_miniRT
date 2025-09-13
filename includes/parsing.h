@@ -84,9 +84,9 @@ typedef struct s_sphere
 typedef struct s_scene
 {
     int         fd;
-    t_a_light   *ambient_light;
-    t_camera    *cam;
-    // t_light   *light;
+    t_a_light   ambient_light;
+    t_camera    cam;
+    // t_light   light;
     t_sphere    *sp;
     int         sp_nbr;
     // t_pl        *pl;
