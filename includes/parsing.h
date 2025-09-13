@@ -44,6 +44,12 @@ typedef struct s_camera
 // ∗ x,y,z coordinates of the light point: -40.0,50.0,0.0
 // ∗ the light brightness ratio in range [0.0,1.0]: 0.6
 // ∗ (unused in mandatory part)R,G,B colors in range [0-255]: 10, 0, 255
+typedef struct s_light
+{
+	t_vec3	l_point;
+	float	br_ratio;
+	//t_color rgb;
+}	t_light;
 
 // ◦ Sphere:
 // sp 0.0,0.0,20.6 12.6 10,0,255
@@ -86,7 +92,7 @@ typedef struct s_scene
     int         fd;
     t_a_light   ambient_light;
     t_camera    cam;
-    // t_light   light;
+    t_light   light;
     t_sphere    *sp;
     int         sp_nbr;
     // t_pl        *pl;

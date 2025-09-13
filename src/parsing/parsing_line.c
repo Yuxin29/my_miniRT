@@ -8,8 +8,8 @@ static bool validate_tokens(char **tokens, t_scene *scene)
 		return (validate_parsing_tokens_a(tokens, scene));
 	if (ft_strncmp(tokens[0], "C", 1) == 0)
 		return (validate_parsing_tokens_c(tokens, scene));
-	// else if (ft_strncmp(tokens[0], "L ", 2) == 0)
-	// 	return (validate_parsing_tokens_l(tokens, scene));
+	if (ft_strncmp(tokens[0], "L", 1) == 0)
+	 	return (validate_parsing_tokens_l(tokens, scene));
 	if (ft_strncmp(tokens[0], "sp", 2) == 0)
 		return (validate_parsing_tokens_sp(tokens, scene));
 	// if (ft_strncmp(tokens[0], "pl ", 3) == 0)
@@ -31,8 +31,8 @@ static bool validate_tokens_nbr(char **tokens)
 		return (true);
 	if (ft_strncmp(tokens[0], "C", 1) == 0 && nbr == 4)
 		return (true);
-	// else if (ft_strncmp(tokens[0], "L ", 2) == 0 && nbr == 3)
-	// 	return (true);
+	if (ft_strncmp(tokens[0], "L", 1) == 0 && nbr == 3)
+	 	return (true);
 	if (ft_strncmp(tokens[0], "sp", 2) == 0 && nbr == 4)
 		return (true);
 	// if (ft_strncmp(tokens[0], "pl ", 3) == 0 && nbr == 4)

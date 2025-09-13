@@ -51,8 +51,23 @@ bool validate_parsing_tokens_c(char **tokens, t_scene *scene)
 	return true;
 }
 
-// static void get_light(char *line, t_scene *scene)
-// {
+bool validate_parsing_tokens_l(char **tokens, t_scene *scene)
+{
+	char	**vec;
 
-// }
+	ft_bzero(&scene->light, sizeof(t_light));
+	vec =  ft_split(tokens[1], ',');
+	if (!vec)
+		return false;
+	if (count_token_nbr(vec) != 3)
+	{
+		ft_free_arr(vec);
+		return false;
+	}
+	ft_filling_vec(vec, &scene->light.l_point);//not check vec values yet
+	scene->light.br_ratio = ft_atoi((const char *)tokens[2]);
+	ft_free_arr(vec);
+	return true;
+}
+
 

@@ -12,26 +12,29 @@ bool validate_parsing_tokens_sp(char **tokens, t_scene *scene)
 	if (!new_sp)
 		return (false);
 	ft_bzero(new_sp, sizeof(t_sphere));;
-	vec_1 = ft_split(tokens[1], ',');
-	vec_2 = ft_split(tokens[3], ',');
 	new_sp->dia = ft_atoi_float(tokens[2]);
-	if (!vec_1 || !vec_2)
+
+	vec_1 = ft_split(tokens[1], ',');
+	if (!vec_1)
 	{
-		if (vec_1)
-			ft_free_arr(vec_1);
-		if (vec_2)
-			ft_free_arr(vec_2);
 		free(new_sp);
 		return (false);
 	}
 	if(count_token_nbr(vec_1) != 3)
 	{
 		ft_free_arr(vec_1);
-		ft_free_arr(vec_2);
 		free(new_sp);
 		return (false);
 	}
 	ft_filling_vec(vec_1, &new_sp->sp_center); //not check vec_1yet
+
+	vec_2 = ft_split(tokens[3], ',');
+	if (!vec_2)
+	{
+		ft_free_arr(vec_1);
+		free(new_sp);
+		return (false);
+	}
 	if (!check_rgb(vec_2))
 	{
 		ft_free_arr(vec_1);
@@ -40,6 +43,7 @@ bool validate_parsing_tokens_sp(char **tokens, t_scene *scene)
 		return (false);
 	}
 	do_color(vec_2, &(new_sp->rgb));
+	
 	new_sp->next = NULL;
 	if (!scene->sp)
 		scene->sp = new_sp;
@@ -50,7 +54,6 @@ bool validate_parsing_tokens_sp(char **tokens, t_scene *scene)
 			tmp = tmp->next;
 		tmp->next = new_sp;
 	}
-	free(new_sp);
 	ft_free_arr(vec_1);
 	ft_free_arr(vec_2);
 	return true;

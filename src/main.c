@@ -22,7 +22,6 @@ void ft_print_scene(t_scene *scene)
 		scene->ambient_light.rgb.b);
 
 	// Camera
-
 	printf("Camera:\n");
 	printf("  position: x=%.2f y=%.2f z=%.2f\n",
 		scene->cam.v_point.x,
@@ -33,6 +32,14 @@ void ft_print_scene(t_scene *scene)
 		scene->cam.v_orien.y,
 		scene->cam.v_orien.z);
 	printf("  FOV: %.2f\n", scene->cam.fov);
+
+	// Ambient Light
+	printf("Light:\n");
+	printf("  light point: x=%.2f y=%.2f z=%.2f\n",
+		scene->light.l_point.x,
+		scene->light.l_point.y,
+		scene->light.l_point.z);
+	printf("  brightness ratio: %.2f\n", scene->light.br_ratio);
 
 	// Spheres
 	cur = scene->sp;
