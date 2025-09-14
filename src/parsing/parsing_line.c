@@ -2,29 +2,29 @@
 #include "parsing.h"
 
 //parsing one line
-static bool validate_tokens(char **tokens, t_scene *scene)
+static bool	validate_tokens(char **tokens, t_scene *scene)
 {
 	if (ft_strncmp(tokens[0], "A", 1) == 0)
 		return (validate_parsing_tokens_a(tokens, scene));
 	if (ft_strncmp(tokens[0], "C", 1) == 0)
 		return (validate_parsing_tokens_c(tokens, scene));
 	if (ft_strncmp(tokens[0], "L", 1) == 0)
-	 	return (validate_parsing_tokens_l(tokens, scene));
+		return (validate_parsing_tokens_l(tokens, scene));
 	if (ft_strncmp(tokens[0], "sp", 2) == 0)
 		return (validate_parsing_tokens_sp(tokens, scene));
 	if (ft_strncmp(tokens[0], "pl", 2) == 0)
 		return( validate_parsing_tokens_pl(tokens, scene));
 	if (ft_strncmp(tokens[0], "cy", 2) == 0)
 		return (validate_parsing_tokens_cy(tokens, scene));
-	return false;
+	return (false);
 }
 
 //check if each line is valid,
 //it has to start with the 6 identifies, it can be empty line
 //return 0 as error and 1 as valid line
-static bool validate_tokens_nbr(char **tokens)
+static bool	validate_tokens_nbr(char **tokens)
 {
-	int nbr;
+	int	nbr;
 
 	nbr = count_token_nbr(tokens);
 	if (ft_strncmp(tokens[0], "A", 1) == 0 && nbr == 3)
@@ -39,10 +39,10 @@ static bool validate_tokens_nbr(char **tokens)
 		return (true);
 	if (ft_strncmp(tokens[0], "cy", 2) == 0 && nbr == 6)
 		return (true);
-	return false;
+	return (false);
 }
 
-static bool validating_line_id(char *line)
+static bool	validating_line_id(char *line)
 {
 	int len;
 
@@ -65,7 +65,7 @@ static bool validating_line_id(char *line)
 }
 
 
-bool validating_parsing_line(char *line, t_scene *scene)
+bool	validating_parsing_line(char *line, t_scene *scene)
 {
 	char	**tokens;
 

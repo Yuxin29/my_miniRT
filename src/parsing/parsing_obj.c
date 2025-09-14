@@ -1,7 +1,7 @@
 #include "miniRT.h"
 #include "parsing.h"
 
-bool validate_parsing_tokens_sp(char **tokens, t_scene *scene)
+bool	validate_parsing_tokens_sp(char **tokens, t_scene *scene)
 {
 	t_sphere	*new_sp;
 	t_sphere	*tmp;
@@ -16,17 +16,14 @@ bool validate_parsing_tokens_sp(char **tokens, t_scene *scene)
 
 	vec_1 = ft_split(tokens[1], ',');
 	colors = ft_split(tokens[3], ',');
-	if (!do_color(colors, &(new_sp->rgb)) || !do_xyz_vectoy(vec_1, &new_sp->sp_center))
+	if (!do_color(colors, &(new_sp->rgb))
+		|| !do_xyz_vectoy(vec_1, &new_sp->sp_center))
 	{
-		if (vec_1)
-			ft_free_arr(vec_1);
-		if (colors)
-			ft_free_arr(colors);
+		free_three_arr(vec_1, NULL, colors);
 		free(new_sp);
 		return (false);
 	}
-	ft_free_arr(vec_1);
-	ft_free_arr(colors);
+	free_three_arr(vec_1, NULL, colors);
 	
 	new_sp->next = NULL;
 	if (!scene->sp)
@@ -38,12 +35,10 @@ bool validate_parsing_tokens_sp(char **tokens, t_scene *scene)
 			tmp = tmp->next;
 		tmp->next = new_sp;
 	}
-	return true;
+	return (true);
 }
 
-// void get_plane(char *line, t_scene *scene)
-
-bool validate_parsing_tokens_pl(char **tokens, t_scene *scene)
+bool	validate_parsing_tokens_pl(char **tokens, t_scene *scene)
 {
 	t_plane	*new_pl;
 	t_plane	*tmp;
@@ -59,20 +54,14 @@ bool validate_parsing_tokens_pl(char **tokens, t_scene *scene)
 	vec_1 = ft_split(tokens[1], ',');
 	vec_2 = ft_split(tokens[2], ',');
 	colors = ft_split(tokens[3], ',');
-	if (!do_normalized_vectoy(vec_2, &new_pl->nor_v) || !do_xyz_vectoy(vec_1, &new_pl->p_in_pl) || !do_color(colors, &(new_pl->rgb)))
+	if (!do_normalized_vectoy(vec_2, &new_pl->nor_v)
+		|| !do_xyz_vectoy(vec_1, &new_pl->p_in_pl) || !do_color(colors, &(new_pl->rgb)))
 	{
-		if (vec_1)
-			ft_free_arr(vec_1);
-		if (vec_2)
-			ft_free_arr(vec_2);
-		if (colors)
-			ft_free_arr(colors);
+		free_three_arr(vec_1, vec_2, colors);
 		free(new_pl);
 		return (false);
 	}
-	ft_free_arr(vec_1);
-	ft_free_arr(vec_2);
-	ft_free_arr(colors);
+	free_three_arr(vec_1, vec_2, colors);
 
 	new_pl->next = NULL;
 	if (!scene->pl)
@@ -84,10 +73,10 @@ bool validate_parsing_tokens_pl(char **tokens, t_scene *scene)
 			tmp = tmp->next;
 		tmp->next = new_pl;
 	}
-	return true;
+	return (true);
 }
 
-bool validate_parsing_tokens_cy(char **tokens, t_scene *scene)
+bool	validate_parsing_tokens_cy(char **tokens, t_scene *scene)
 {
 	t_cylinder	*new_cy;
 	t_cylinder	*tmp;
@@ -98,7 +87,7 @@ bool validate_parsing_tokens_cy(char **tokens, t_scene *scene)
 	new_cy = malloc(sizeof(t_cylinder));
 	if (!new_cy)
 		return (false);
-	ft_bzero(new_cy, sizeof(t_cylinder));;
+	ft_bzero(new_cy, sizeof(t_cylinder));
 	new_cy->dia = ft_atoi_float(tokens[3]);
 	new_cy->height = ft_atoi_float(tokens[4]);
 	new_cy->radius = new_cy->dia / 2;
@@ -106,20 +95,14 @@ bool validate_parsing_tokens_cy(char **tokens, t_scene *scene)
 	vec_1 = ft_split(tokens[1], ',');
 	vec_2 = ft_split(tokens[2], ',');
 	colors = ft_split(tokens[5], ',');
-	if(!(do_normalized_vectoy(vec_2, &new_cy->cy_axis)) || !(do_xyz_vectoy(vec_1, &new_cy->cy_center)) || !do_color(colors, &(new_cy->rgb)))
+	if(!(do_normalized_vectoy(vec_2, &new_cy->cy_axis))
+		|| !(do_xyz_vectoy(vec_1, &new_cy->cy_center)) || !do_color(colors, &(new_cy->rgb)))
 	{
-		if (vec_1)
-			ft_free_arr(vec_1);
-		if (vec_2)
-			ft_free_arr(vec_2);
-		if (colors)
-			ft_free_arr(colors);
+		free_three_arr(vec_1, vec_2, colors);
 		free(new_cy);
 		return (false);
 	}
-	ft_free_arr(vec_1);
-	ft_free_arr(vec_2);
-	ft_free_arr(colors);
+	free_three_arr(vec_1, vec_2, colors);
 	
 	new_cy->next = NULL;
 	if (!scene->cl)
@@ -131,5 +114,5 @@ bool validate_parsing_tokens_cy(char **tokens, t_scene *scene)
 			tmp = tmp->next;
 		tmp->next = new_cy;
 	}
-	return true;
+	return (true);
 }

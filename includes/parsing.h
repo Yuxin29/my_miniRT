@@ -151,7 +151,8 @@ bool    validate_parsing_tokens_cy(char **tokens, t_scene *scene);
 
 //parsing_utils_1.c   3/5
 float	ft_atoi_float(char *str);
-int	count_token_nbr(char **tokens);
+int 	count_token_nbr(char **tokens);
+void    free_three_arr(char **vec_1, char **vec_2, char **colors);
 
 //parsing_utils_2.c   5/5
 bool    do_color(char **colors, t_color *rgb);

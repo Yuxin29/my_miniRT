@@ -1,34 +1,34 @@
 #include "miniRT.h"
 #include "parsing.h"
 
-static bool check_valid_color(char *color)
-{
-    int i;
-
-    i = 0;
-	while (color[i])
-	{
-		if (!ft_isdigit(color[i]))
-			return false;
-		i++;
-	}
-	if (ft_atoi(color) > 255)
-		return false;
-	return true;
-}
-
-bool do_color(char **colors, t_color *rgb)
+static bool	check_valid_color(char *color)
 {
 	int i;
 
-    i = 0;
-    if (!colors)
-		return false;
+	i = 0;
+	while (color[i])
+	{
+		if (!ft_isdigit(color[i]))
+			return (false);
+		i++;
+	}
+	if (ft_atoi(color) > 255)
+		return (false);
+	return (true);
+}
+
+bool	do_color(char **colors, t_color *rgb)
+{
+	int i;
+
+	i = 0;
+	if (!colors)
+		return (false);
 	if (count_token_nbr(colors) != 3)
 	while(colors[i])
 	{
-        if (!check_valid_color(colors[i]))
-			return false;
+		if (!check_valid_color(colors[i]))
+			return (false);
 		i++;
 	}
 	rgb->r = ft_atoi(colors[0]);
@@ -41,14 +41,14 @@ static bool check_valid_float(char *vec)
 {
 	int i;
 
-    i = 0;
+	i = 0;
 	while (vec[i])
 	{
 		if (!ft_isdigit(vec[i]) && vec[i] != '.' && vec[i] != '-')
-			return false;
+			return (false);
 		i++;
 	}
-	return true;
+	return (true);
 }
 
 // | Axis                           | Recommended Range | Explanation                                                           |
@@ -60,15 +60,15 @@ bool do_xyz_vectoy(char **vec, t_vec3 *vec_xyz)
 
     i = 0;
 	if (!vec)
-		return false;
+		return (false);
     if (count_token_nbr(vec) != 3)
-		return false;
+		return (false);
 	while(vec[i])
 	{
 		if (!check_valid_float(vec[i]))		//more check
-			return false;
+			return (false);
 		if (ft_atoi_float(vec[i]) > 1000 || ft_atoi_float(vec[i]) < -1000)
-			return false;
+			return (false);
 		i++;
 	}
 	vec_xyz->x = ft_atoi_float(vec[0]); 
@@ -83,19 +83,19 @@ bool do_normalized_vectoy(char **vec, t_vec3 *vec_nor)
 
     i = 0;
 	if (!vec)
-		return false;
+		return (false);
     if (count_token_nbr(vec) != 3)
-		return false;
+		return (false);
 	while(vec[i])
 	{
         if (!check_valid_float(vec[i]))		//more check
-			return false;
+			return (false);
 		if (ft_atoi_float(vec[i]) > 1 || ft_atoi_float(vec[i]) < -1)
-			return false;
+			return (false);
 		i++;
 	}
 	vec_nor->x = ft_atoi_float(vec[0]); 
 	vec_nor->y = ft_atoi_float(vec[1]); 
 	vec_nor->z = ft_atoi_float(vec[2]); 
-	return true;
+	return (true);
 }
