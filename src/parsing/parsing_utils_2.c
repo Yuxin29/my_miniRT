@@ -22,8 +22,9 @@ bool do_color(char **colors, t_color *rgb)
 	int i;
 
     i = 0;
-    if (count_token_nbr(colors) != 3)
+    if (!colors)
 		return false;
+	if (count_token_nbr(colors) != 3)
 	while(colors[i])
 	{
         if (!check_valid_color(colors[i]))
@@ -45,12 +46,14 @@ bool do_xyz_vectoy(char **vec, t_vec3 *vec_xyz)
 	int i;
 
     i = 0;
+	if (!vec)
+		return false;
     if (count_token_nbr(vec) != 3)
 		return false;
 	while(vec[i])
 	{
-        if (vec[i][0] == '-')		//more check
-			return false;
+        // if (!ft_isdigit(vec[i][0]))		//more check
+		// 	return false;
 		i++;
 	}
 	vec_xyz->x = ft_atoi_float(vec[0]); 
@@ -64,12 +67,14 @@ bool do_normalized_vectoy(char **vec, t_vec3 *vec_nor)
 	int i;
 
     i = 0;
+	if (!vec)
+		return false;
     if (count_token_nbr(vec) != 3)
 		return false;
 	while(vec[i])
 	{
-        if (vec[i][0] == '-')		//more check
-			return false;
+        // if (vec[i][0] == '-')		//more check
+		// 	return false;
 		i++;
 	}
 	vec_nor->x = ft_atoi_float(vec[0]); 

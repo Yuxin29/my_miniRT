@@ -6,7 +6,7 @@ bool validate_parsing_tokens_sp(char **tokens, t_scene *scene)
 	t_sphere	*new_sp;
 	t_sphere	*tmp;
 	char		**vec_1;
-	char		**vec_2;
+	char		**colors;
 
 	new_sp = malloc(sizeof(t_sphere));
 	if (!new_sp)
@@ -15,26 +15,18 @@ bool validate_parsing_tokens_sp(char **tokens, t_scene *scene)
 	new_sp->dia = ft_atoi_float(tokens[2]);
 
 	vec_1 = ft_split(tokens[1], ',');
-	if (!vec_1)
+	colors = ft_split(tokens[3], ',');
+	if (!do_color(colors, &(new_sp->rgb)) || !do_xyz_vectoy(vec_1, &new_sp->sp_center))
 	{
+		if (vec_1)
+			ft_free_arr(vec_1);
+		if (colors)
+			ft_free_arr(colors);
 		free(new_sp);
 		return (false);
 	}
-	vec_2 = ft_split(tokens[3], ',');
-	if (!vec_2)
-	{
-		ft_free_arr(vec_1);
-		free(new_sp);
-		return (false);
-	}
-
-	if (!do_color(vec_2, &(new_sp->rgb)) || !do_xyz_vectoy(vec_1, &new_sp->sp_center))
-	{
-		ft_free_arr(vec_1);
-		ft_free_arr(vec_2);
-		free(new_sp);
-		return (false);
-	}
+	ft_free_arr(vec_1);
+	ft_free_arr(colors);
 	
 	new_sp->next = NULL;
 	if (!scene->sp)
@@ -46,8 +38,6 @@ bool validate_parsing_tokens_sp(char **tokens, t_scene *scene)
 			tmp = tmp->next;
 		tmp->next = new_sp;
 	}
-	ft_free_arr(vec_1);
-	ft_free_arr(vec_2);
 	return true;
 }
 
@@ -67,43 +57,22 @@ bool validate_parsing_tokens_pl(char **tokens, t_scene *scene)
 	ft_bzero(new_pl, sizeof(t_plane));;
 
 	vec_1 = ft_split(tokens[1], ',');
-	if (!vec_1)
-	{
-		free(new_pl);
-		return (false);
-	}
 	vec_2 = ft_split(tokens[2], ',');
-	if (!vec_2)
-	{
-		ft_free_arr(vec_1);
-		free(new_pl);
-		return (false);
-	}
 	colors = ft_split(tokens[3], ',');
-	if (!colors)
+	if (!do_normalized_vectoy(vec_2, &new_pl->nor_v) || !do_xyz_vectoy(vec_1, &new_pl->p_in_pl) || !do_color(colors, &(new_pl->rgb)))
 	{
-		ft_free_arr(vec_1);
-		ft_free_arr(vec_2);
+		if (vec_1)
+			ft_free_arr(vec_1);
+		if (vec_2)
+			ft_free_arr(vec_2);
+		if (colors)
+			ft_free_arr(colors);
 		free(new_pl);
 		return (false);
 	}
-
-	if (!do_normalized_vectoy(vec_2, &new_pl->nor_v) || !do_xyz_vectoy(vec_1, &new_pl->p_in_pl))
-	{
-		ft_free_arr(vec_1);
-		ft_free_arr(vec_2);
-		free(new_pl);
-		return (false);
-	}
-
-	if (!do_color(colors, &(new_pl->rgb)))
-	{
-		ft_free_arr(vec_1);
-		ft_free_arr(vec_2);
-		ft_free_arr(colors);
-		free(new_pl);
-		return (false);
-	}
+	ft_free_arr(vec_1);
+	ft_free_arr(vec_2);
+	ft_free_arr(colors);
 
 	new_pl->next = NULL;
 	if (!scene->pl)
@@ -115,10 +84,6 @@ bool validate_parsing_tokens_pl(char **tokens, t_scene *scene)
 			tmp = tmp->next;
 		tmp->next = new_pl;
 	}
-
-	ft_free_arr(vec_1);
-	ft_free_arr(vec_2);
-	ft_free_arr(colors);
 	return true;
 }
 
@@ -139,44 +104,22 @@ bool validate_parsing_tokens_cy(char **tokens, t_scene *scene)
 	new_cy->radius = new_cy->dia / 2;
 
 	vec_1 = ft_split(tokens[1], ',');
-	if (!vec_1)
-	{
-		free(new_cy);
-		return (false);
-	}
 	vec_2 = ft_split(tokens[2], ',');
-	if (!vec_2)
-	{
-		ft_free_arr(vec_1);
-		free(new_cy);
-		return (false);
-	}
-
-	if(!do_normalized_vectoy(vec_2, &new_cy->cy_axis) || !do_xyz_vectoy(vec_1, &new_cy->cy_center))
-	{
-		ft_free_arr(vec_1);
-		ft_free_arr(vec_2);
-		free(new_cy);
-		return (false);
-	}
-
 	colors = ft_split(tokens[5], ',');
-	if (!colors)
+	if(!(do_normalized_vectoy(vec_2, &new_cy->cy_axis)) || !(do_xyz_vectoy(vec_1, &new_cy->cy_center)) || !do_color(colors, &(new_cy->rgb)))
 	{
-		ft_free_arr(vec_1);
-		ft_free_arr(vec_2);
+		if (vec_1)
+			ft_free_arr(vec_1);
+		if (vec_2)
+			ft_free_arr(vec_2);
+		if (colors)
+			ft_free_arr(colors);
 		free(new_cy);
 		return (false);
 	}
-
-	if (!do_color(colors, &(new_cy->rgb)))
-	{
-		ft_free_arr(vec_1);
-		ft_free_arr(vec_2);
-		ft_free_arr(colors);
-		free(new_cy);
-		return (false);
-	}
+	ft_free_arr(vec_1);
+	ft_free_arr(vec_2);
+	ft_free_arr(colors);
 	
 	new_cy->next = NULL;
 	if (!scene->cl)
@@ -188,9 +131,5 @@ bool validate_parsing_tokens_cy(char **tokens, t_scene *scene)
 			tmp = tmp->next;
 		tmp->next = new_cy;
 	}
-
-	ft_free_arr(vec_1);
-	ft_free_arr(vec_2);
-	ft_free_arr(colors);
 	return true;
 }
