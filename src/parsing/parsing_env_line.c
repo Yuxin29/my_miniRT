@@ -130,6 +130,7 @@ bool	validate_parsing_tokens_sp(char **tokens, t_scene *scene)
 		free (new_sp);
 		return (false);
 	}
+	new_sp->radius = new_sp->dia / 2;
 	if (!fill_sp_bio_data(tokens, new_sp))
 	{
 		free (new_sp);

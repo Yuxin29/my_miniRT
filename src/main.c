@@ -98,9 +98,8 @@ void ft_print_scene(t_scene *scene)
 			printf("    axis of cylinder: x=%.2f y=%.2f z=%.2f\n",
 				cur_cy->cy_axis.x, cur_cy->cy_axis.y, cur_cy->cy_axis.z);
 			printf("    diameter: %.2f (radius: %.2f)\n",
-				cur_cy->dia, cur_cy->dia);
-			printf("    height: %.2f (radius: %.2f)\n",
-				cur_cy->dia, cur_cy->height);
+				cur_cy->dia, cur_cy->radius);
+			printf("    height: %.2f\n", cur_cy->height);
 			printf("    color: R=%d G=%d B=%d\n",
 				cur_cy->rgb.r, cur_cy->rgb.g, cur_cy->rgb.b);
 			cur_cy = cur_cy->next;
