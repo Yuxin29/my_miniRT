@@ -60,7 +60,7 @@ t_scene *parsing(int ac, char **av)
         raw_line = get_next_line(scene->fd);
 		if (!raw_line)
 			break ;
-		line = ft_strtrim(raw_line, "\n"); //might be other change line
+		line = ft_strtrim(raw_line, "\n"); //might be other change line, need to null check
         if (line[0] && !validating_parsing_line(line, scene))
 		{
 			ft_putstr_fd("invalid line in the file", 1);

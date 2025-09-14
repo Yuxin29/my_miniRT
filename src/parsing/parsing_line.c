@@ -12,10 +12,10 @@ static bool validate_tokens(char **tokens, t_scene *scene)
 	 	return (validate_parsing_tokens_l(tokens, scene));
 	if (ft_strncmp(tokens[0], "sp", 2) == 0)
 		return (validate_parsing_tokens_sp(tokens, scene));
-	// if (ft_strncmp(tokens[0], "pl ", 3) == 0)
-	// 	return( validate_parsing_tokens_pl(tokens, scene));
-	// if (ft_strncmp(tokens[0], "cy ", 3) == 0)
-	// 	return (validate_parsing_tokens_cy(tokens, scene));
+	if (ft_strncmp(tokens[0], "pl", 2) == 0)
+		return( validate_parsing_tokens_pl(tokens, scene));
+	if (ft_strncmp(tokens[0], "cy", 2) == 0)
+		return (validate_parsing_tokens_cy(tokens, scene));
 	return false;
 }
 
@@ -35,10 +35,10 @@ static bool validate_tokens_nbr(char **tokens)
 	 	return (true);
 	if (ft_strncmp(tokens[0], "sp", 2) == 0 && nbr == 4)
 		return (true);
-	// if (ft_strncmp(tokens[0], "pl ", 3) == 0 && nbr == 4)
-	// 	return (true);
-	// if (ft_strncmp(tokens[0], "cy ", 3) == 0 && nbr == 4)
-	// 	return (true);
+	if (ft_strncmp(tokens[0], "pl", 2) == 0 && nbr == 4)
+		return (true);
+	if (ft_strncmp(tokens[0], "cy", 2) == 0 && nbr == 6)
+		return (true);
 	return false;
 }
 

@@ -8,7 +8,9 @@
 
 void ft_print_scene(t_scene *scene)
 {
-	t_sphere *cur;
+	t_sphere	*cur_sp;
+	t_plane		*cur_pl;
+	t_cylinder	*cur_cy;
 	int i = 1;
 
 	printf("\n===== TEST PRINTING SCENE =====\n");
@@ -42,22 +44,66 @@ void ft_print_scene(t_scene *scene)
 	printf("  brightness ratio: %.2f\n", scene->light.br_ratio);
 
 	// Spheres
-	cur = scene->sp;
-	if (!cur)
+	cur_sp = scene->sp;
+	if (!cur_sp)
 		printf("Spheres: (none)\n");
 	else
 	{
 		printf("Spheres (%d):\n", scene->sp_nbr);
-		while (cur)
+		while (cur_sp)
 		{
 			printf("  Sphere %d:\n", i++);
 			printf("    center: x=%.2f y=%.2f z=%.2f\n",
-				cur->sp_center.x, cur->sp_center.y, cur->sp_center.z);
+				cur_sp->sp_center.x, cur_sp->sp_center.y, cur_sp->sp_center.z);
 			printf("    diameter: %.2f (radius: %.2f)\n",
-				cur->dia, cur->radius);
+				cur_sp->dia, cur_sp->radius);
 			printf("    color: R=%d G=%d B=%d\n",
-				cur->rgb.r, cur->rgb.g, cur->rgb.b);
-			cur = cur->next;
+				cur_sp->rgb.r, cur_sp->rgb.g, cur_sp->rgb.b);
+			cur_sp = cur_sp->next;
+		}
+	}
+
+	// plane
+	cur_pl = scene->pl;
+	if (!cur_pl)
+		printf("Planes: (none)\n");
+	else
+	{
+		printf("Planes (%d):\n", scene->pl_nbr);
+		while (cur_pl)
+		{
+			printf("  Planes %d:\n", i++);
+			printf("    a point in the plane: x=%.2f y=%.2f z=%.2f\n",
+				cur_pl->p_in_pl.x, cur_pl->p_in_pl.y, cur_pl->p_in_pl.z);
+			printf("    3d normalized normal vector: x=%.2f y=%.2f z=%.2f\n",
+				cur_pl->nor_v.x, cur_pl->nor_v.y, cur_pl->nor_v.z);
+			printf("    color: R=%d G=%d B=%d\n",
+				cur_pl->rgb.r, cur_pl->rgb.g, cur_pl->rgb.b);
+			cur_pl = cur_pl->next;
+		}
+	}
+
+	// Cylinder
+	cur_cy = scene->cl;
+	if (!cur_cy)
+		printf("Cylinders: (none)\n");
+	else
+	{
+		printf("Cylinders (%d):\n", scene->cl_nbr);
+		while (cur_cy)
+		{
+			printf("  Cylinder %d:\n", i++);
+			printf("    center of the cylinder: x=%.2f y=%.2f z=%.2f\n",
+				cur_cy->cy_center.x, cur_cy->cy_center.y, cur_cy->cy_center.z);
+			printf("    axis of cylinder: x=%.2f y=%.2f z=%.2f\n",
+				cur_cy->cy_axis.x, cur_cy->cy_axis.y, cur_cy->cy_axis.z);
+			printf("    diameter: %.2f (radius: %.2f)\n",
+				cur_cy->dia, cur_cy->dia);
+			printf("    height: %.2f (radius: %.2f)\n",
+				cur_cy->dia, cur_cy->height);
+			printf("    color: R=%d G=%d B=%d\n",
+				cur_cy->rgb.r, cur_cy->rgb.g, cur_cy->rgb.b);
+			cur_cy = cur_cy->next;
 		}
 	}
 

@@ -20,14 +20,6 @@ bool validate_parsing_tokens_sp(char **tokens, t_scene *scene)
 		free(new_sp);
 		return (false);
 	}
-	if(count_token_nbr(vec_1) != 3)
-	{
-		ft_free_arr(vec_1);
-		free(new_sp);
-		return (false);
-	}
-	ft_filling_vec(vec_1, &new_sp->sp_center); //not check vec_1yet
-
 	vec_2 = ft_split(tokens[3], ',');
 	if (!vec_2)
 	{
@@ -35,14 +27,14 @@ bool validate_parsing_tokens_sp(char **tokens, t_scene *scene)
 		free(new_sp);
 		return (false);
 	}
-	if (!check_rgb(vec_2))
+
+	if (!do_color(vec_2, &(new_sp->rgb)) || !do_xyz_vectoy(vec_1, &new_sp->sp_center))
 	{
 		ft_free_arr(vec_1);
 		ft_free_arr(vec_2);
 		free(new_sp);
 		return (false);
 	}
-	do_color(vec_2, &(new_sp->rgb));
 	
 	new_sp->next = NULL;
 	if (!scene->sp)
@@ -60,11 +52,145 @@ bool validate_parsing_tokens_sp(char **tokens, t_scene *scene)
 }
 
 // void get_plane(char *line, t_scene *scene)
-// {
 
-// }
+bool validate_parsing_tokens_pl(char **tokens, t_scene *scene)
+{
+	t_plane	*new_pl;
+	t_plane	*tmp;
+	char	**vec_1;
+	char	**vec_2;
+	char	**colors;
 
-// void get_cylinder(char *line, t_scene *scene)
-// {
+	new_pl = malloc(sizeof(t_plane));
+	if (!new_pl)
+		return (false);
+	ft_bzero(new_pl, sizeof(t_plane));;
 
-// }
+	vec_1 = ft_split(tokens[1], ',');
+	if (!vec_1)
+	{
+		free(new_pl);
+		return (false);
+	}
+	vec_2 = ft_split(tokens[2], ',');
+	if (!vec_2)
+	{
+		ft_free_arr(vec_1);
+		free(new_pl);
+		return (false);
+	}
+	colors = ft_split(tokens[3], ',');
+	if (!colors)
+	{
+		ft_free_arr(vec_1);
+		ft_free_arr(vec_2);
+		free(new_pl);
+		return (false);
+	}
+
+	if (!do_normalized_vectoy(vec_2, &new_pl->nor_v) || !do_xyz_vectoy(vec_1, &new_pl->p_in_pl))
+	{
+		ft_free_arr(vec_1);
+		ft_free_arr(vec_2);
+		free(new_pl);
+		return (false);
+	}
+
+	if (!do_color(colors, &(new_pl->rgb)))
+	{
+		ft_free_arr(vec_1);
+		ft_free_arr(vec_2);
+		ft_free_arr(colors);
+		free(new_pl);
+		return (false);
+	}
+
+	new_pl->next = NULL;
+	if (!scene->pl)
+		scene->pl = new_pl;
+	else
+	{
+		tmp = scene->pl;
+		while (tmp->next)
+			tmp = tmp->next;
+		tmp->next = new_pl;
+	}
+
+	ft_free_arr(vec_1);
+	ft_free_arr(vec_2);
+	ft_free_arr(colors);
+	return true;
+}
+
+bool validate_parsing_tokens_cy(char **tokens, t_scene *scene)
+{
+	t_cylinder	*new_cy;
+	t_cylinder	*tmp;
+	char		**vec_1;
+	char		**vec_2;
+	char		**colors;
+
+	new_cy = malloc(sizeof(t_cylinder));
+	if (!new_cy)
+		return (false);
+	ft_bzero(new_cy, sizeof(t_cylinder));;
+	new_cy->dia = ft_atoi_float(tokens[3]);
+	new_cy->height = ft_atoi_float(tokens[4]);
+	new_cy->radius = new_cy->dia / 2;
+
+	vec_1 = ft_split(tokens[1], ',');
+	if (!vec_1)
+	{
+		free(new_cy);
+		return (false);
+	}
+	vec_2 = ft_split(tokens[2], ',');
+	if (!vec_2)
+	{
+		ft_free_arr(vec_1);
+		free(new_cy);
+		return (false);
+	}
+
+	if(!do_normalized_vectoy(vec_2, &new_cy->cy_axis) || !do_xyz_vectoy(vec_1, &new_cy->cy_center))
+	{
+		ft_free_arr(vec_1);
+		ft_free_arr(vec_2);
+		free(new_cy);
+		return (false);
+	}
+
+	colors = ft_split(tokens[5], ',');
+	if (!colors)
+	{
+		ft_free_arr(vec_1);
+		ft_free_arr(vec_2);
+		free(new_cy);
+		return (false);
+	}
+
+	if (!do_color(colors, &(new_cy->rgb)))
+	{
+		ft_free_arr(vec_1);
+		ft_free_arr(vec_2);
+		ft_free_arr(colors);
+		free(new_cy);
+		return (false);
+	}
+	
+	new_cy->next = NULL;
+	if (!scene->cl)
+		scene->cl = new_cy;
+	else
+	{
+		tmp = scene->cl;
+		while (tmp->next)
+			tmp = tmp->next;
+		tmp->next = new_cy;
+	}
+
+	ft_free_arr(vec_1);
+	ft_free_arr(vec_2);
+	ft_free_arr(colors);
+	return true;
+}

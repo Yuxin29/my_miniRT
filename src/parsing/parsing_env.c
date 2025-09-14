@@ -9,12 +9,13 @@ bool validate_parsing_tokens_a(char **tokens, t_scene *scene)
 	colors = ft_split(tokens[2], ',');
 	if (!colors)
 		return false; //need to have error msgs??
-	if (!check_rgb(colors))
+	
+	if (!do_color(colors, &(scene->ambient_light.rgb)))
 	{
 		ft_free_arr(colors);
 		return false;
 	}
-	do_color(colors, &(scene->ambient_light.rgb));
+
 	//float not check yet
 	scene->ambient_light.ratio = ft_atoi_float(tokens[1]);
 	ft_free_arr(colors);
@@ -38,14 +39,12 @@ bool validate_parsing_tokens_c(char **tokens, t_scene *scene)
 			ft_free_arr(vec_2);
 		return false;
 	}
-	if (count_token_nbr(vec_1) != 3 || count_token_nbr(vec_2) != 3)
+	if (!do_xyz_vectoy(vec_1, &scene->cam.v_point) || !do_normalized_vectoy(vec_2, &scene->cam.v_orien))
 	{
 		ft_free_arr(vec_1);
 		ft_free_arr(vec_2);
 		return false;
 	}
-	ft_filling_vec(vec_1, &scene->cam.v_point);//not check vec values yet
-	ft_filling_vec(vec_2, &scene->cam.v_orien);//not check vec values yet
 	ft_free_arr(vec_1);
 	ft_free_arr(vec_2);
 	return true;
@@ -59,12 +58,11 @@ bool validate_parsing_tokens_l(char **tokens, t_scene *scene)
 	vec =  ft_split(tokens[1], ',');
 	if (!vec)
 		return false;
-	if (count_token_nbr(vec) != 3)
+	if (!do_xyz_vectoy(vec, &scene->light.l_point))
 	{
 		ft_free_arr(vec);
 		return false;
 	}
-	ft_filling_vec(vec, &scene->light.l_point);//not check vec values yet
 	scene->light.br_ratio = ft_atoi((const char *)tokens[2]);
 	ft_free_arr(vec);
 	return true;
