@@ -112,39 +112,32 @@ static bool	fill_sp_bio_data(char **tokens, t_sphere	*new_sp)
 bool	validate_parsing_tokens_sp(char **tokens, t_scene *scene)
 {
 	t_sphere	*new_sp;
-	t_sphere	*tmp;
 
 	new_sp = malloc(sizeof(t_sphere));
 	if (!new_sp)
 		return (false);
 	ft_bzero(new_sp, sizeof(t_sphere));
 	if (check_valid_float(tokens[2]))
-		new_sp->dia = ft_atoi_float(tokens[2]);
+		new_sp->radius = ft_atoi_float(tokens[2]) / 2;
 	else
 	{
 		free (new_sp);
 		return (false);
 	}
-	if (new_sp->dia < 0 || new_sp->dia > 1000)
+	if (new_sp->radius < 0 || new_sp->radius > 1000)
 	{
 		free (new_sp);
 		return (false);
 	}
-	new_sp->radius = new_sp->dia / 2;
 	if (!fill_sp_bio_data(tokens, new_sp))
 	{
 		free (new_sp);
 		return (false);
 	}
-	new_sp->next = NULL;
-	if (!scene->sp)
-		scene->sp = new_sp;
-	else
+	if (!add_obj_to_scene(scene, OBJ_SP, new_sp))
 	{
-		tmp = scene->sp;
-		while (tmp->next)
-			tmp = tmp->next;
-		tmp->next = new_sp;
+		free(new_sp);
+		return (false);
 	}
 	return (true);
 }

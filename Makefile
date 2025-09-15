@@ -13,7 +13,7 @@ SRCS := $(SRC_DIR)/main.c \
 		$(SRC_DIR)/parsing/parsing_env_line.c $(SRC_DIR)/parsing/parsing_obj_line.c \
 		$(SRC_DIR)/parsing/parsing_utils_1.c $(SRC_DIR)/parsing/parsing_utils_2.c \
 		$(SRC_DIR)/render/mlx_window.c \
-		$(SRC_DIR)/utils/err_and_free.c $(SRC_DIR)/utils/vector.c\
+		$(SRC_DIR)/utils/vector.c\
 		$(SRC_DIR)/intersection/sphere.c \
 		$(SRC_DIR)/raytrace/ray_at.c \
 

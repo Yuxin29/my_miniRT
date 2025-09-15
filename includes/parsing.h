@@ -42,6 +42,22 @@ typedef struct s_light
 	//t_color rgb;
 }	t_light;
 
+typedef enum s_obj_type
+{
+	OBJ_SP,
+	OBJ_PL, 
+	OBJ_CY,
+}	t_obj_type;
+
+typedef struct s_object t_object;
+
+typedef struct s_object
+{
+	t_obj_type			type;
+	void				*data;
+	struct	s_object	*next;
+}						t_object;
+
 // ◦ Sphere:
 // sp 0.0,0.0,20.6 12.6 10,0,255
 // ∗ identifier: sp
@@ -53,10 +69,8 @@ typedef struct s_sphere t_sphere;
 typedef struct s_sphere
 {
 	t_vec3		sp_center;
-	float		dia;
 	float		radius; // lin modify
 	t_color		rgb;
-	t_sphere	*next;
 }				t_sphere;
 
 // ◦ Plane:
@@ -73,7 +87,6 @@ typedef struct s_plane
 	t_vec3		p_in_pl;
 	t_vec3		nor_v;
 	t_color		rgb;
-	t_plane		*next;
 }	t_plane;
 
 // ◦ Cylinder:
@@ -91,11 +104,9 @@ typedef struct s_cylinder
 {
 	t_vec3		cy_center;
 	t_vec3		cy_axis;
-	float		dia;
 	float		radius;
 	float		height;
 	t_color		rgb;
-	t_cylinder	*next;
 }				t_cylinder;
 
 // a ascene with everything inside
@@ -105,12 +116,7 @@ typedef struct s_scene
 	t_a_light	ambient_light;
 	t_camera	cam;
 	t_light		light;
-	t_sphere	*sp;
-	t_plane		*pl;
-	t_cylinder	*cl;
-	int			sp_nbr;
-	int			pl_nbr;
-	int			cl_nbr;
+	t_object	*objects;
 	mlx_t		*mlx;
 	mlx_image_t	*img;
 }	t_scene;
@@ -118,9 +124,11 @@ typedef struct s_scene
 //parsing_file.c          4/5
 t_scene	*parsing(int ac, char **av);
 
-//parsing_line.c        4/5
+//parsing_line.c        5/5
 //check each line, return true or false to parsing
 bool	validating_parsing_line(char *line, t_scene *scene);
+bool	add_obj_to_scene(t_scene *scene, t_obj_type type, void *data);
+void	ft_free_scene(t_scene *scene);
 
 // parsing_env.c     5/5
 // parsing a_light, camera, light and sphere:

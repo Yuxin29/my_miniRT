@@ -32,7 +32,6 @@ static bool	fill_pl_tria_data(char **tokens, t_plane *new_pl)
 bool	validate_parsing_tokens_pl(char **tokens, t_scene *scene)
 {
 	t_plane	*new_pl;
-	t_plane	*tmp;
 
 	new_pl = malloc(sizeof(t_plane));
 	if (!new_pl)
@@ -43,15 +42,10 @@ bool	validate_parsing_tokens_pl(char **tokens, t_scene *scene)
 		free (new_pl);
 		return (false);
 	}
-	new_pl->next = NULL;
-	if (!scene->pl)
-		scene->pl = new_pl;
-	else
+	if (!add_obj_to_scene(scene, OBJ_PL, new_pl))
 	{
-		tmp = scene->pl;
-		while (tmp->next)
-			tmp = tmp->next;
-		tmp->next = new_pl;
+		free(new_pl);
+		return (false);
 	}
 	return (true);
 }
@@ -84,16 +78,15 @@ static bool	fill_cy_float(char **tokens, t_cylinder	*new_cy)
 {
 	if (check_valid_float(tokens[3]) && check_valid_float(tokens[4]))
 	{
-		new_cy->dia = ft_atoi_float(tokens[3]);
+		new_cy->radius = ft_atoi_float(tokens[3]) / 2;
 		new_cy->height = ft_atoi_float(tokens[4]);
 	}
 	else
 		return (false);
-	if (new_cy->dia < 0 || new_cy->dia > 1000)
+	if (new_cy->radius < 0 || new_cy->radius > 1000)
 		return (false);
 	if (new_cy->height < 0 || new_cy->height > 1000)
 		return (false);
-	new_cy->radius = new_cy->dia / 2;
 	return (true);
 }
 
@@ -109,7 +102,6 @@ static bool	fill_cy_float(char **tokens, t_cylinder	*new_cy)
 bool	validate_parsing_tokens_cy(char **tokens, t_scene *scene)
 {
 	t_cylinder	*new_cy;
-	t_cylinder	*tmp;
 
 	new_cy = malloc(sizeof(t_cylinder));
 	if (!new_cy)
@@ -125,15 +117,10 @@ bool	validate_parsing_tokens_cy(char **tokens, t_scene *scene)
 		free (new_cy);
 		return (false);
 	}
-	new_cy->next = NULL;
-	if (!scene->cl)
-		scene->cl = new_cy;
-	else
+	if (!add_obj_to_scene(scene, OBJ_CY, new_cy))
 	{
-		tmp = scene->cl;
-		while (tmp->next)
-			tmp = tmp->next;
-		tmp->next = new_cy;
+		free(new_cy);
+		return (false);
 	}
 	return (true);
 }
