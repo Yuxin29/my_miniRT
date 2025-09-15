@@ -1,5 +1,5 @@
 #include "miniRT.h"
-#include "parsing.h"
+#include "raytrace.h"
 
 //Mathematically: P(t)=origin+t⋅direction
 //why? :  we need to find “where” a ray hits something, this function calculates that point.

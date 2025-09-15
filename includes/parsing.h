@@ -1,7 +1,8 @@
 #ifndef PARSING_H
 # define PARSING_H
 
-#include "miniRT.h"
+# include "miniRT.h"
+# include "raytrace.h"
 
 //struct
 typedef struct s_color
@@ -21,21 +22,6 @@ typedef struct s_a_light
     float   ratio;
     t_color rgb;
 }	t_a_light;
-
-// ◦ Camera:
-// C -50.0,0,20 0,0,1 70
-// ∗ identifier: C
-// ∗ x,y,z coordinates of the view point: -50.0,0,20
-// ∗ 3d normalized orientation vector.
-// In range [-1,1] for each x,y,z axis:
-// 0.0,0.0,1.0
-// ∗ FOV : Horizontal field of view in degrees in range [0,180]: 70
-typedef struct s_camera
-{
-	t_vec3	v_point;
-	t_vec3	v_orien;
-	float	fov; //lin modify
-}	t_camera;
 
 // ◦ Light:
 // L -40.0,50.0,0.0 0.6 10,0,255
@@ -72,7 +58,7 @@ typedef struct s_sphere
 // pl 0.0,0.0,-10.0 0.0,1.0,0.0 0,0,225
 // ∗ identifier: pl
 // ∗ x,y,z coordinates of a point in the plane: 0.0,0.0,-10.0
-// ∗ 3d normalized normal vector. 
+// ∗ 3d normalized normal vector.
 // In range [-1,1] for each x,y,z axis: 0.0,1.0,0.0
 // ∗ R,G,B colors in range [0-255]: 0,0,225
 typedef struct s_plane t_plane;
@@ -89,7 +75,7 @@ typedef struct s_plane
 // cy 50.0,0.0,20.6 0.0,0.0,1.0 14.2 21.42 10,0,255
 // ∗ identifier: cy
 // ∗ x,y,z coordinates of the center of the cylinder: 50.0,0.0,20.6
-// ∗ 3d normalized vector of axis of cylinder. 
+// ∗ 3d normalized vector of axis of cylinder.
 // In range [-1,1] for each x,y,z axis:0.0,0.0,1.0
 // ∗ the cylinder diameter: 14.2
 // ∗ the cylinder height: 21.42

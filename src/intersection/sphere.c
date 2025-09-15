@@ -29,25 +29,27 @@ We want the first visible intersection — the front of the object.
 */
 bool	hit_sphere(t_ray ray, t_sphere *sphere, t_hit_record *rec)
 {
-	float	a;
-	float	b;
-	float	c;
-	t_vec3	oc;
-	float	discriminant;
-	float	t;
+	t_sphere_hit_info	hit;
+	float	t1;
+	float	t2;
 
-	oc = vec_sub(ray.origin, ray.direction);
-	a = vec_dot(ray.direction, ray.direction);
-	b = 2.0 * vec_dot(oc, ray.direction);
-	c = vec_dot(oc, oc) - sphere->radius * sphere->radius;
-	discriminant = b * b - 4 * a * c;
-	if (discriminant < 0)
+	hit.oc = vec_sub(ray.origin, ray.direction);
+	hit.a = vec_dot(ray.direction, ray.direction);
+	hit.b = 2.0f * vec_dot(hit.oc, ray.direction);
+	hit.c = vec_dot(hit.oc, hit.oc) - sphere->radius * sphere->radius;
+	hit.discriminant = hit.b * hit.b - 4 * hit.a * hit.c;
+	if (hit.discriminant < 0)
 		return (false);
-	t = (-b - sqrt(discriminant)) / (2.0 * a);
-	if (t < 0)
+	t1 = (-hit.b - sqrt(hit.discriminant)) / (2.0f * hit.a);
+	t2 = (-hit.b + sqrt(hit.discriminant)) / (2.0f * hit.a);
+	if (t1 > 0)
+		hit.t = t1;
+	else if (t2 > 0)
+		hit.t = t2;
+	else
 		return (false);
-	rec->t = t;
-	rec->point = ray_at(ray, t);
+	rec->t = hit.t;
+	rec->point = ray_at(ray, hit.t);
 	rec->normal = vec_normalize(vec_sub(rec->point, sphere->sp_center));
 	return (true);
 }
