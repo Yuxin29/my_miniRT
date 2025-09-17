@@ -27,7 +27,7 @@ void	key_hook(mlx_key_data_t keydata, void *param);
 
 
 //move_and_rotate.c
-void change_scene(t_scene *scene, t_vec3 move);
+void change_scene(t_scene *scene, t_vec3 move, float scale);
 
 #endif
 

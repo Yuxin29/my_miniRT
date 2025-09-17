@@ -2,7 +2,7 @@
 #include    "render.h"
 #include    "parsing.h"
 
-void change_scene(t_scene *scene, t_vec3 move)
+void change_scene(t_scene *scene, t_vec3 move, float scale)
 {
     t_object *cur;
 
@@ -11,8 +11,14 @@ void change_scene(t_scene *scene, t_vec3 move)
     {
         if (cur->type == OBJ_SP)
         {
-            t_sphere *sp = (t_sphere *)cur->data;
-            sp->sp_center = vec_add(sp->sp_center, move); 
+            if (vec_len(move) > 0 || scale != 0)
+            {
+                t_sphere *sp = (t_sphere *)cur->data;
+                if (scale)
+                    sp->radius = sp->radius * scale; 
+                if (vec_len(move) > 0)
+                    sp->sp_center = vec_add(sp->sp_center, move); 
+            }
         }
         if (cur->type == OBJ_PL)
         {
