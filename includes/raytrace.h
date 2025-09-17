@@ -7,6 +7,7 @@
 
 typedef struct s_object t_object;
 typedef struct s_sphere t_sphere;
+typedef struct s_plane t_plane;
 //typedef struct s_color t_color;
 
 //struct
@@ -81,5 +82,6 @@ void	init_viewport(t_camera *cam, t_camera_view *view);
 t_ray	generate_primary_ray(int x, int y, t_camera_view *view);
 
 bool	hit_sphere(t_ray ray, t_sphere *sphere, t_hit_record *rec);
+bool	hit_plane(t_ray ray, t_plane *plane, t_hit_record *rec);
 
 #endif

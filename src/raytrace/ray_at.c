@@ -43,8 +43,8 @@ bool	hit_objects(t_ray ray, t_object *obj, t_hit_record *rec)
 		cur_hit = false;
 		if (obj->type == OBJ_SP)
 			cur_hit = hit_sphere(ray, (t_sphere *)obj->data, &tmp);
-		// else if(obj->type == OBJ_PL)
-		// 	cur_hit = hit_plane(ray, (t_plane *)obj->data, &tmp);
+		else if(obj->type == OBJ_PL)
+			cur_hit = hit_plane(ray, (t_plane *)obj->data, &tmp);
 		// else if(obj->type == OBJ_CY)
 		// 	cur_hit = hit_cylinder(ray, (t_cylinder *)obj->data, &tmp);
 		if (cur_hit)
