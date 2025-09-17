@@ -26,8 +26,10 @@ void	close_window(void *param);
 void	key_hook(mlx_key_data_t keydata, void *param);
 
 
-//move_and_rotate.c
-void change_scene(t_scene *scene, t_vec3 move, float scale);
+//move_and_rotate.c		4/5
+void change_move(t_scene *scene, t_vec3 move);
+void change_zoomin(t_scene *scene, float scale);
+void change_rotation(t_scene *scene, t_vec3 y_axis, float angle);
 
 #endif
 
