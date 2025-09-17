@@ -22,12 +22,11 @@ void	setup_scene(t_scene *scene)
 	t_sphere *s = malloc(sizeof(t_sphere));
 	s->sp_center = vec3(0, 0, -5);
 	s->radius = 1.0f;
-	s->rgb = (t_color){255, 100, 20};
+	s->rgb = (t_color){255, 0, 0};
 	add_object(&scene->objects, OBJ_SP, s);
 }
 int	main(void)
 {
-	//mlx_t			*mlx;
 	t_scene			scene;
 
 	scene.mlx = mlx_init(WIDTH, HEIGHT, "miniRT", false);
@@ -37,6 +36,11 @@ int	main(void)
 	scene.cam.v_point = vec3(0, 0, 0);
 	scene.cam.v_orien = vec3(0, 0, -1);
 	scene.cam.fov = 70;
+	scene.ambient_light.ratio = 0.5f;
+	scene.ambient_light.rgb = (t_color){220, 20, 180};
+	scene.light.br_ratio = 0.8f;
+	scene.light.l_point = vec3(10, 20, 0);
+	scene.light.rgb = (t_color){250, 20, 35};
 	setup_scene(&scene);
 
 	render_scene(&scene);
@@ -153,7 +157,7 @@ int	main(void)
 // 		return(-1); //erro msg sent in parsing
 
 // 	//remove later
-// 	ft_print_scene(scene); //testing. remove later
+// 	//ft_print_scene(scene); //testing. remove later
 
 // 	// // mlx
 // 	if (!mlx_window(scene))

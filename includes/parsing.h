@@ -30,7 +30,7 @@ typedef struct s_light
 {
 	t_vec3	l_point;
 	float	br_ratio;
-	//t_color rgb;
+	t_color rgb;
 }	t_light;
 
 typedef enum s_obj_type

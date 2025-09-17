@@ -2,12 +2,13 @@
 # define RAYTRACE_H
 
 # include "miniRT.h"
-//# include "parsing.h"
+# include "parsing.h"
 # include <math.h>
 
 typedef struct s_object t_object;
 typedef struct s_sphere t_sphere;
-//typedef struct s_color t_color;
+typedef struct s_a_light t_a_light;
+typedef struct s_light t_light;
 
 //struct
 //lin modify type, 8 bits for each color instead of using 32 bits(int) for each color
@@ -81,5 +82,8 @@ void	init_viewport(t_camera *cam, t_camera_view *view);
 t_ray	generate_primary_ray(int x, int y, t_camera_view *view);
 
 bool	hit_sphere(t_ray ray, t_sphere *sphere, t_hit_record *rec);
+t_color	apply_ambient(t_color obj_color, t_a_light amb);
+t_color	apply_diffuse(t_light light, t_hit_record rec);
+t_color	final_color(t_color obj_color, t_a_light amb, t_light light, t_hit_record rec);
 
 #endif
