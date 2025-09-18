@@ -7,6 +7,7 @@
 
 typedef struct s_object t_object;
 typedef struct s_sphere t_sphere;
+//typedef struct s_color t_color;
 typedef struct s_a_light t_a_light;
 typedef struct s_light t_light;
 typedef struct s_plane t_plane;
@@ -89,7 +90,6 @@ bool	hit_sphere(t_ray ray, t_sphere *sphere, t_hit_record *rec);
 bool	hit_plane(t_ray ray, t_plane *plane, t_hit_record *rec);
 //handle_light
 t_color	final_color(t_color obj_color, t_a_light amb, t_light light, t_hit_record rec);
-
 
 
 #endif

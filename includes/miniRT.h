@@ -1,8 +1,8 @@
 #ifndef MINIRT_H
 # define MINIRT_H
 
-#define WIDTH 800
-#define HEIGHT 600
+#define WIDTH 2800
+#define HEIGHT 2100
 
 typedef struct s_vec3
 {
@@ -19,6 +19,10 @@ float	vec_len(t_vec3 a);
 t_vec3	vec_normalize(t_vec3 v);
 float	vec_dot(t_vec3 a, t_vec3 b);
 t_vec3	vec_cross(t_vec3 a, t_vec3 b);
+
+typedef struct s_scene t_scene;
+
+// void	ft_print_scene(t_scene *scene);
 
 //self_defined header
 # include "../libft/libft.h"

@@ -101,6 +101,7 @@ typedef struct s_scene
 	t_object	*objects;
 	mlx_t		*mlx;
 	mlx_image_t	*img;
+	bool		need_loop;
 }	t_scene;
 
 //parsing_file.c          4/5

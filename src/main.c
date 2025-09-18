@@ -76,7 +76,6 @@ int main(int ac, char **av)
 
 // test printing delete alter
 // =======================================================
-
 // void	ft_print_scene(t_scene *scene)
 // {
 // 	t_object	*tmp;
@@ -167,6 +166,3 @@ int main(int ac, char **av)
 
 // 	printf("===== END OF SCENE PRINT =====\n\n");
 // }
-// //=======================================================
-
-
