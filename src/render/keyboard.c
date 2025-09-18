@@ -56,12 +56,12 @@ static void rotate_keys(mlx_key_data_t keydata, t_scene *scene)
   if (keydata.key == MLX_KEY_LEFT)
 	{
     scene->need_loop = 1;
-    change_rotation(scene, y_axis, -0.2);
+    change_rotation(scene, y_axis, -0.3);
   }
   if (keydata.key == MLX_KEY_RIGHT)
 	{
     scene->need_loop = 1;
-    change_rotation(scene, y_axis, 0.2);
+    change_rotation(scene, y_axis, 0.3);
   }
 }
 

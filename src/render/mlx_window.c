@@ -34,7 +34,6 @@ void	render_scene(t_scene *scene)
 	}
 }
 
-
 static void render_scene_loop(void *param)
 {
     t_scene *scene = (t_scene *)param;

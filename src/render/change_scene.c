@@ -63,10 +63,20 @@ void change_zoomin(t_scene *scene, float scale)
 }
 
 // vrot​=v⋅cosθ+(k×v)⋅sinθ+k⋅(k⋅v)(1−cosθ)
-static t_vec3 vec_rotate(t_vec3 v, t_vec3 axis, float angle)
+// float	vec_dot(t_vec3 a, t_vec3 b)
+// t_vec3	vec_cross(t_vec3 a, t_vec3 b)//only modify the length
+// t_vec3	vec_scale(t_vec3 a, float scalar)
+static t_vec3 vec_rotate(t_vec3 v, t_vec3 k, float angle)
 {
-    //not written, just put it here, translate the formular later
-    return (vec_add(v, vec_scale(axis, angle)));
+    t_vec3 vec_1;
+    t_vec3 vec_2;
+    t_vec3 vec_3;
+
+    k = vec_normalize(k); // I Dont really need this, because I always put int {0, 1, 0}
+    vec_1 = vec_scale(v, cos(angle));
+    vec_2 = vec_scale(vec_cross(k, v), sin(angle));
+    vec_3 = vec_scale(k, vec_dot(k, v)*(1 - cos(angle)));
+    return (vec_add(vec_1, vec_add(vec_2, vec_3)));
 }
 
 void change_rotation(t_scene *scene, t_vec3 y_axis, float angle)
