@@ -19,7 +19,12 @@ void	ft_free_scene(t_scene *scene)
 	}
 	while (scene->objects)
 	{
+		// obj_tmp = scene->objects->next;
+		// free(scene->objects);
+		// scene->objects = obj_tmp;
 		obj_tmp = scene->objects->next;
+		if (scene->objects->data)
+			free(scene->objects->data);
 		free(scene->objects);
 		scene->objects = obj_tmp;
 	}
