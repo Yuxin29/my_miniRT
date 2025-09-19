@@ -2,7 +2,6 @@
 #include "render.h"
 #include "parsing.h"
 
-
 // Clicking on the red cross on the window’s frame 
 // must close the window and quit the program cleanly.
 void	close_window(void *param)

@@ -13,13 +13,13 @@ static bool	check_file(char **av, t_scene *scene)
 	ext = ft_strrchr(av[1], '.');
 	if (!ext || ft_strcmp(ext, ".rt") != 0)
 	{
-		ft_putstr_fd("wrong format\n", 1);
+		ft_putstr_fd("Error: wrong format\n", 1);
 		return (false);
 	}
 	scene->fd = open(av[1], O_RDONLY);
 	if (scene->fd == -1)
 	{
-		ft_putstr_fd("open file failed\n", 1);
+		ft_putstr_fd("Error: open file failed\n", 1);
 		return (false);
 	}
 	return (true);
@@ -34,13 +34,13 @@ static t_scene	*precheck_av(int ac, char **av)
 
 	if (ac < 2)
 	{
-		ft_putstr_fd("missing file argument\n", 1);
+		ft_putstr_fd("Error: missing file argument\n", 1);
 		return (NULL);
 	}
 	scene = malloc(sizeof(t_scene));
 	if (!scene)
 	{
-		ft_putstr_fd("malloc scene failed\n", 1);
+		ft_putstr_fd("Error: malloc scene failed\n", 1);
 		return (NULL);
 	}
 	if (!check_file(av, scene))
@@ -62,7 +62,7 @@ static t_scene	*precheck_av(int ac, char **av)
 // free the line and screen
 static t_scene	*dealing_line_err(char *line, t_scene *scene)
 {
-	ft_putstr_fd("Invalid line in the file: ", 1);
+	ft_putstr_fd("Error: Invalid line in the file: ", 1);
 	ft_putstr_fd(line, 1);
 	ft_putchar_fd('\n', 1);
 	free(line);

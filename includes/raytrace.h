@@ -7,12 +7,10 @@
 
 typedef struct s_object t_object;
 typedef struct s_sphere t_sphere;
-//typedef struct s_color t_color;
 typedef struct s_a_light t_a_light;
 typedef struct s_light t_light;
 typedef struct s_plane t_plane;
 typedef struct s_color t_color;
-
 
 //struct
 //lin modify type, 8 bits for each color instead of using 32 bits(int) for each color
@@ -81,9 +79,6 @@ bool	hit_objects(t_ray ray, t_object *obj, t_hit_record *rec);
 
 t_vec3	vec3(float x, float y, float z);
 void	init_camera_frame(t_camera	*cam, t_vec3 *right, t_vec3 *up);
-// void	init_viewport(t_camera *cam, t_camera_view *view);
-// t_ray	generate_primary_ray(int x, int y, t_camera_view *view);
-//yuxin added flexible size
 void	init_viewport(t_scene *scene, t_camera_view *view);
 t_ray	generate_primary_ray(int x, int y, t_camera_view *view, t_scene *scene);
 

@@ -3,13 +3,7 @@
 
 //headers
 #include "miniRT.h"
-#include "utils.h"
 # include "raytrace.h"
-
-//libs
-#include <fcntl.h>      //open
-#include <stdio.h>      //printf for testing
-
 
 // Ambient lightning: A 0.2 255,255,255
 // ∗ identifier: A
@@ -52,7 +46,6 @@ typedef struct s_object
 // ∗ x,y,z coordinates of the sphere center: 0.0,0.0,20.6
 // ∗ the sphere dmeter: 12.6
 // ∗ R,G,B colors in range [0-255]: 10, 0, 255
-
 typedef struct s_sphere
 {
 	t_vec3		sp_center;
@@ -65,7 +58,6 @@ typedef struct s_sphere
 // ∗ x,y,z coordinates of a point in the plane: 0.0,0.0,-10.0
 // ∗ 3d normalized vector. In range [-1,1]: 0.0,1.0,0.0
 // ∗ R,G,B colors in range [0-255]: 0,0,225
-
 typedef struct s_plane
 {
 	t_vec3		p_in_pl;
@@ -81,7 +73,6 @@ typedef struct s_plane
 // ∗ the cylinder diameter: 14.2
 // ∗ the cylinder height: 21.42
 // ∗ R,G,B colors in range [0,255]: 10, 0, 255
-
 typedef struct s_cylinder
 {
 	t_vec3		cy_center;

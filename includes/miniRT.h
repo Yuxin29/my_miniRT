@@ -23,13 +23,10 @@ t_vec3	vec_cross(t_vec3 a, t_vec3 b);
 
 typedef struct s_scene t_scene;
 
-// void	ft_print_scene(t_scene *scene);
-
 //self_defined header
 # include "../libft/libft.h"
 #include "MLX42/MLX42.h"
 #include "parsing.h"
-#include "utils.h"
 #include "raytrace.h"
 #include "render.h"
 
@@ -37,5 +34,6 @@ typedef struct s_scene t_scene;
 # include <stdlib.h>
 # include <stdio.h>
 # include <math.h>
+#include <fcntl.h>      //open 
 
 #endif

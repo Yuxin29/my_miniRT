@@ -2,6 +2,7 @@
 #include "render.h"
 #include "parsing.h"
 
+// camera updated inside it, be called repeately
 //0xAAFF1111, Transparency + rgb
 static void	render_scene(t_scene *scene)
 {
@@ -30,8 +31,7 @@ static void	render_scene(t_scene *scene)
 	}
 }
 
-// yuxin added this one,
-// to call render_scene repeatedly if the keyboard as pressed some valid buttoms
+// call render_scene repeatedly if the keyboard / mousing chaning scene
 static void	render_scene_loop(void *param)
 {
 	t_scene	*scene;
@@ -59,7 +59,7 @@ static void	handle_screen_resize(int32_t width, int32_t height, void *param)
 	scene->img = mlx_new_image(scene->mlx, width, height);
 	if (!scene->img)
 	{
-		ft_putstr_fd("mlx_new_image failed on resize\n", 2);
+		ft_putstr_fd("Error: resize: mlx_new_image failed\n", 2);
 		return ;
 	}
 	mlx_image_to_window(scene->mlx, scene->img, 0, 0);
@@ -74,16 +74,16 @@ static void	handle_screen_resize(int32_t width, int32_t height, void *param)
 // mlx_close_hook(scene->mlx, close_window, scene);  //clicking red x
 bool	mlx_window(t_scene *scene)
 {
-	scene->mlx = mlx_init(WIDTH, HEIGHT, "miniRT_test", true);
+	scene->mlx = mlx_init(WIDTH, HEIGHT, "miniRT", true);
 	if (!scene->mlx)
 	{
-		ft_putstr_fd("mlx_init failed\n", 1);
+		ft_putstr_fd("Error: mlx_init failed\n", 1);
 		return (false);
 	}
 	scene->img = mlx_new_image(scene->mlx, WIDTH, HEIGHT);
 	if (!scene->img)
 	{
-		ft_putstr_fd("mlx_new image failed\n", 1);
+		ft_putstr_fd("Error: mlx_new image failed\n", 1);
 		return (false);
 	}
 	mlx_image_to_window(scene->mlx, scene->img, 0, 0);

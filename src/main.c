@@ -2,19 +2,20 @@
 #include "parsing.h"
 #include    "render.h"
 
+// in case of errors, msg sent in sice parsing and mlx
+// If any misconfiguration of any kind is encountered in the file 
+// the program must exit properly and return "Error\n" 
+// followed by an explicit error message of your choice.
 int	main(int ac, char **av)
 {
 	t_scene	*scene;
 
-	scene = parsing(ac, av); //parsing
+	scene = parsing(ac, av);
 	if (!scene)
 		return(-1); //erro msg sent in parsing
 	//ft_print_scene(scene); //testing. remove later
-	if (!mlx_window(scene)) // mlx
-	{
-		ft_putstr_fd("mlx initiation failed\n", 1);
+	if (!mlx_window(scene))
 		return (-1);
-	}
 	return (0);
 }
 

@@ -49,11 +49,8 @@ void	change_zoomin(t_scene *scene, float scale)
 	{
 		if (cur->type == OBJ_SP)
 		{
-			if (scale != 0)
-			{
-				sp = (t_sphere *)cur->data;
-				sp->radius = sp->radius * scale;
-			}
+			sp = (t_sphere *)cur->data;
+			sp->radius = sp->radius * scale;
 		}
 		if (cur->type == OBJ_CY)
 		{
@@ -83,6 +80,7 @@ static t_vec3	vec_rotate(t_vec3 v, t_vec3 k, float angle)
 	v_3 = vec_scale(k, vec_dot(k, v) * (1 - cos(angle)));
 	return (vec_add(v_1, vec_add(v_2, v_3)));
 }
+
 //Your program must be able to apply translation and rotation transformation 
 // toobjects, lights and cameras 
 // (except for spheres and lights that cannot be rotated).
