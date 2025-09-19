@@ -83,7 +83,8 @@ t_ray	generate_primary_ray(int x, int y, t_camera_view *view, t_scene *scene)
 	t_vec3	pixel_pos;
 	t_ray	ray;
 
-	u = (float)x / (scene->width - 1);
+	//u = (float)x / (scene->width - 1);
+	u = 1.0f - ((float)x / (scene->width - 1));
 	v = (float)y / (scene->height - 1);
 	pixel_pos = vec_add(view->viewport_origin, vec_scale(view->right, u * view->viewport_width));
 	pixel_pos = vec_sub(pixel_pos, vec_scale(view->up, v * view->viewport_height));

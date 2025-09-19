@@ -1,6 +1,6 @@
-#include	"miniRT.h"
-#include	"render.h"
-#include	"parsing.h"
+#include "miniRT.h"
+#include "render.h"
+#include "parsing.h"
 
 //0xAAFF1111, Transparency + rgb
 static void	render_scene(t_scene *scene)
@@ -9,7 +9,7 @@ static void	render_scene(t_scene *scene)
 	int				y;
 	t_render_data	data;
 
-	init_viewport(scene, &data.view); //yuxin added flexible size
+	init_viewport(scene, &data.view);
 	y = 0;
 	while (y < scene->height)
 	{
@@ -56,7 +56,7 @@ static void	handle_screen_resize(int32_t width, int32_t height, void *param)
 	if (!scene->img)
 	{
 		ft_putstr_fd("mlx_new_image failed on resize\n", 2);
-		return;
+		return ;
 	}
 	mlx_image_to_window(scene->mlx, scene->img, 0, 0);
 	scene->width = width;
@@ -65,6 +65,9 @@ static void	handle_screen_resize(int32_t width, int32_t height, void *param)
 }
 
 //mlx_init: 4th: full scree> true or false
+// mlx_key_hook(scene->mlx, key_hook, scene); //Keyboard press/release
+// mlx_resize_hook(scene->mlx, handle_screen_resize, scene); //resizeing by mouse
+// mlx_close_hook(scene->mlx, close_window, scene);  //clicking red x
 bool	mlx_window(t_scene *scene)
 {
 	scene->mlx = mlx_init(WIDTH, HEIGHT, "miniRT_test", true);
@@ -80,10 +83,9 @@ bool	mlx_window(t_scene *scene)
 		return (false);
 	}
 	mlx_image_to_window(scene->mlx, scene->img, 0, 0);
-	mlx_key_hook(scene->mlx, key_hook, scene); //Keyboard press/release
-	mlx_resize_hook(scene->mlx, handle_screen_resize, scene); //resizeing by mouse
-	mlx_close_hook(scene->mlx, close_window, scene);  //clicking red x
-
+	mlx_key_hook(scene->mlx, key_hook, scene);
+	mlx_resize_hook(scene->mlx, handle_screen_resize, scene);
+	mlx_close_hook(scene->mlx, close_window, scene);
 	mlx_loop_hook(scene->mlx, render_scene_loop, scene);
 	mlx_loop(scene->mlx);
 	return (true);
