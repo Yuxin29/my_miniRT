@@ -15,10 +15,14 @@ SRCS := $(SRC_DIR)/main.c \
 		$(SRC_DIR)/render/mlx_window.c $(SRC_DIR)/render/keyboard.c $(SRC_DIR)/render/change_scene.c \
 		$(SRC_DIR)/utils/vector.c\
 		$(SRC_DIR)/raytrace/hit_sphere_plane.c $(SRC_DIR)/raytrace/hit_objects.c \
-		$(SRC_DIR)/raytrace/camera_ray.c $(SRC_DIR)/raytrace/handle_light.c \
+		$(SRC_DIR)/raytrace/camera_ray.c $(SRC_DIR)/raytrace/handle_light_mandatory.c $(SRC_DIR)/raytrace/handle_light_utils.c \
 		$(SRC_DIR)/raytrace/handle_shadow.c \
 
 OBJS := $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
+OBJS_BONUS := $(filter-out $(OBJ_DIR)/raytrace/handle_light_mandatory.o, $(OBJS))
+
+BONUS_SRCS := $(SRC_DIR)/raytrace/handle_light_checkerboard_bonus.c
+BONUS_OBJS := $(BONUS_SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
 MLX_REPO := https://github.com/codam-coding-college/MLX42.git
 MLX_DIR := MLX42
@@ -31,6 +35,9 @@ all: $(LIBFT_LIB) $(MLX_LIB) $(NAME)
 
 $(NAME): $(LIBFT_LIB) $(MLX_LIB) $(OBJS)
 		@$(CC) $(CFLAGS) $(OBJS) $(LIBFT_LIB) $(MLX_FLAGS) -o $(NAME)
+
+bonus: $(LIBFT_LIB) $(MLX_LIB) $(OBJS_BONUS) $(BONUS_OBJS)
+	@$(CC) $(CFLAGS) $(OBJS_BONUS) $(BONUS_OBJS) $(LIBFT_LIB) $(MLX_FLAGS) -o $(NAME)
 
 $(LIBFT_LIB):
 		@make -C $(LIBFT_DIR)

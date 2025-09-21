@@ -1,7 +1,5 @@
 #include "miniRT.h"
 
-
-
 static bool	update_hit_record(t_hit_record *tmp, float *closest_t, t_hit_record *rec, t_object *obj)
 {
 	bool	any_hit;

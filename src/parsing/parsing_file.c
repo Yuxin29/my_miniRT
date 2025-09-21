@@ -52,9 +52,6 @@ static t_scene	*precheck_av(int ac, char **av)
 	scene->height = HEIGHT;
 	scene->need_loop = true;
 	scene->running = true;
-	// scene->al_existence = false;
-	// scene->c_existence = false;
-	// scene->l_existence = false;
 	return (scene);
 }
 

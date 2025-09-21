@@ -88,8 +88,15 @@ t_ray	generate_primary_ray(int x, int y, t_camera_view *view, t_scene *scene);
 //hit_sphere_plane
 bool	hit_sphere(t_ray ray, t_sphere *sphere, t_hit_record *rec);
 bool	hit_plane(t_ray ray, t_plane *plane, t_hit_record *rec);
+
+//handle_light_utils
+int		clamp(int value, int min, int max);
+t_color apply_ambient(t_color obj_color, t_a_light amb);
+t_color	apply_diffuse(t_light light, t_hit_record rec);
+
 //handle_light
 t_color	final_color(t_color obj_color, t_scene *scene, t_hit_record rec);
+
 //handle_shadow
 bool	is_in_shadow(t_hit_record rec, t_light light, t_object *obj);
 

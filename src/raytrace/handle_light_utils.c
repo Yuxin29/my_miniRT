@@ -3,7 +3,7 @@
 /*
 should control the value from 0-255
 */
-static int	clamp(int value, int min, int max)
+int	clamp(int value, int min, int max)
 {
 	if (value > max)
 		return (max);
@@ -17,7 +17,7 @@ uint8_t * float => float, but unit8_t is int;
 so i should cast the value to int before do clamp
 ambient_color = object_color * ambient_light_color * ambient_ratio;
 */
-static t_color apply_ambient(t_color obj_color, t_a_light amb)
+t_color apply_ambient(t_color obj_color, t_a_light amb)
 {
 	t_color result;
 
@@ -34,7 +34,7 @@ final_color = ambient + (obj_color.r * light_color.r/255 * brightness * diffuse_
 N = surface normal at the hit point
 L = direction to the light
 */
-static t_color	apply_diffuse(t_light light, t_hit_record rec)
+t_color	apply_diffuse(t_light light, t_hit_record rec)
 {
 	float	diffuse_strength;
 	t_vec3	light_dir;
@@ -48,24 +48,4 @@ static t_color	apply_diffuse(t_light light, t_hit_record rec)
 	color.g = clamp((int)rec.rgb.g * (light.rgb.g / 255.0f) * light.br_ratio * diffuse_strength, 0, 255);
 	color.b = clamp((int)rec.rgb.b * (light.rgb.b / 255.0f) * light.br_ratio * diffuse_strength, 0, 255);
 	return (color);
-}
-
-/*
-final_color = ambient + diffuse
-*/
-t_color	final_color(t_color obj_color, t_scene *scene, t_hit_record rec)
-{
-	t_color	final;
-	t_color	ambient;
-	t_color	diffuse;
-
-	ambient = apply_ambient(obj_color, scene->ambient_light);
-	if(is_in_shadow(rec, scene->light, scene->objects))
-		diffuse = (t_color){0, 0, 0};
-	else
-		diffuse = apply_diffuse(scene->light, rec);
-	final.r = clamp(ambient.r + diffuse.r, 0, 255);
-	final.g = clamp(ambient.g + diffuse.g, 0, 255);
-	final.b = clamp(ambient.b + diffuse.b, 0, 255);
-	return (final);
 }
