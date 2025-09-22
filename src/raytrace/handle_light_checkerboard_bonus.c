@@ -7,11 +7,11 @@
 // I: light brightness
 // R: vector
 // V: vector
-static t_color apply_specular()
-{
+// static t_color apply_specular()
+// {
 
 
-}
+// }
 
 typedef struct s_hit_record
 {
