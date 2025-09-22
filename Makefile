@@ -16,13 +16,14 @@ SRCS := $(SRC_DIR)/main.c \
 		$(SRC_DIR)/utils/vector.c\
 		$(SRC_DIR)/raytrace/hit_sphere_plane.c $(SRC_DIR)/raytrace/hit_cylinder.c \
 		$(SRC_DIR)/raytrace/hit_objects.c \
-		$(SRC_DIR)/raytrace/camera_ray.c $(SRC_DIR)/raytrace/handle_light_mandatory.c $(SRC_DIR)/raytrace/handle_light_utils.c \
+		$(SRC_DIR)/raytrace/camera_ray.c \
+		$(SRC_DIR)/raytrace/handle_light_mandatory.c $(SRC_DIR)/raytrace/handle_light_utils.c \
 		$(SRC_DIR)/raytrace/handle_shadow.c \
 
 OBJS := $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 OBJS_BONUS := $(filter-out $(OBJ_DIR)/raytrace/handle_light_mandatory.o, $(OBJS))
 
-BONUS_SRCS := $(SRC_DIR)/raytrace/handle_light_checkerboard_bonus.c
+BONUS_SRCS := $(SRC_DIR)/raytrace/handle_light_bonus.c
 BONUS_OBJS := $(BONUS_SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
 MLX_REPO := https://github.com/codam-coding-college/MLX42.git
