@@ -61,13 +61,11 @@ bool	hit_sphere(t_ray ray, t_sphere *sphere, t_hit_record *rec)
 	return (true);
 }
 
-
 bool	hit_plane(t_ray ray, t_plane *plane, t_hit_record *rec)
 {
 	float	don;
 
 	don = vec_dot(plane->nor_v, ray.direction);
-	// if (don >= 0) //
 	if (fabs(don) < EPSILON)
 		return (false);
 	rec->t = vec_dot(vec_sub(plane->p_in_pl, ray.origin), plane->nor_v) / don; // how fa

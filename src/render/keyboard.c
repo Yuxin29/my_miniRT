@@ -15,14 +15,14 @@ void	close_window(void *param)
 static void	move_keys(mlx_key_data_t keydata, t_scene *scene)
 {
 	t_vec3	move;
-	float		move_unit;
+	float	move_unit;
 
 	move = (t_vec3){0,0,0};
 	move_unit = 1.0;
 	if (keydata.key == MLX_KEY_W)
-		move = (t_vec3){0, +move_unit, 0};
-	if (keydata.key == MLX_KEY_S)
 		move = (t_vec3){0, -move_unit, 0};
+	if (keydata.key == MLX_KEY_S)
+		move = (t_vec3){0, +move_unit, 0};
 	if (keydata.key == MLX_KEY_A)
 		move = (t_vec3){move_unit, 0, 0};
 	if (keydata.key == MLX_KEY_D)
