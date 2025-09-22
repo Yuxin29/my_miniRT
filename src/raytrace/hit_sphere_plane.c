@@ -32,7 +32,7 @@ We want the first visible intersection — the front of the object.
 */
 bool	hit_sphere(t_ray ray, t_sphere *sphere, t_hit_record *rec)
 {
-	t_hit_info	hit;
+	t_hit_sphere_info	hit;
 	float	t1;
 	float	t2;
 
@@ -45,25 +45,30 @@ bool	hit_sphere(t_ray ray, t_sphere *sphere, t_hit_record *rec)
 		return (false);
 	t1 = (-hit.b - sqrt(hit.discriminant)) / (2.0f * hit.a);
 	t2 = (-hit.b + sqrt(hit.discriminant)) / (2.0f * hit.a);
-	if (t1 > EPSILON && (t1 < t2 || t2 <= EPSILON))
+	if (t1 > EPSILON && t2 > EPSILON)
+		hit.t = fmin(t1, t2);
+	else if (t1 > EPSILON)
 		hit.t = t1;
 	else if (t2 > EPSILON)
 		hit.t = t2;
 	else
-		return (false);;
+		return (false);
 	rec->t = hit.t;
 	rec->point = vec_add(ray.origin, vec_scale(ray.direction, rec->t));
 	rec->normal = vec_normalize(vec_sub(rec->point, sphere->sp_center));
+	if (vec_dot(ray.direction, rec->normal) > 0)
+		rec->normal = vec_scale(rec->normal, -1);
+	rec->rgb = sphere->rgb;
 	return (true);
 }
 
 //yuxin needs to write
 bool	hit_plane(t_ray ray, t_plane *plane, t_hit_record *rec)
 {
-	float				don;
+	float	don;
 
 	don = vec_dot(plane->nor_v, ray.direction);
-	if (don == 0) // if (fabs(den) < 1e - 6), 1e-6 =（0.000001）
+	if (don >= 0) // if (fabs(den) < 1e - 6), 1e-6 =（0.000001）
 		return (false);
 	rec->rgb = plane->rgb;
 	rec->t = vec_dot(vec_sub(plane->p_in_pl, ray.origin), plane->nor_v) / don; // how fa

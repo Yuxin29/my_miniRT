@@ -17,6 +17,11 @@ static bool	hit_shadow(t_ray ray, t_object *obj, float max_len)
 
 	while (obj)
 	{
+		// if (obj == ignore) // ignore itself
+		// {
+		// 	obj = obj->next;
+		// 	continue;
+		// }
 		if (obj->type == OBJ_SP && hit_sphere(ray, (t_sphere *)obj->data, &tmp))
 		{
 			if (tmp.t > EPSILON && tmp.t < max_len)
@@ -27,7 +32,11 @@ static bool	hit_shadow(t_ray ray, t_object *obj, float max_len)
 			if (tmp.t > EPSILON && tmp.t < max_len)
 				return (true);
 		}
-		// else if (cy...)
+		else if (obj->type == OBJ_CY && hit_cylinder(ray, (t_cylinder *)obj->data, &tmp))
+		{
+			if (tmp.t > EPSILON && tmp.t < max_len)
+				return (true);
+		}
 		obj = obj->next;
 	}
 	return (false);
@@ -43,3 +52,4 @@ bool	is_in_shadow(t_hit_record rec, t_light light, t_object *obj)
 	light_len = vec_len(vec_sub(light.l_point, rec.point));
 	return(hit_shadow(shadow, obj, light_len));
 }
+

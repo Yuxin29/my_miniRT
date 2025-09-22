@@ -34,7 +34,7 @@ final_color = ambient + (obj_color.r * light_color.r/255 * brightness * diffuse_
 N = surface normal at the hit point
 L = direction to the light
 */
-t_color	apply_diffuse(t_light light, t_hit_record rec)
+t_color	apply_diffuse(t_color obj_color, t_light light, t_hit_record rec)
 {
 	float	diffuse_strength;
 	t_vec3	light_dir;
@@ -44,8 +44,8 @@ t_color	apply_diffuse(t_light light, t_hit_record rec)
 	diffuse_strength = vec_dot(rec.normal, light_dir);
 	if (diffuse_strength < 0.0f)
 		diffuse_strength = 0.0f;
-	color.r = clamp((int)rec.rgb.r * (light.rgb.r / 255.0f) * light.br_ratio * diffuse_strength, 0, 255);
-	color.g = clamp((int)rec.rgb.g * (light.rgb.g / 255.0f) * light.br_ratio * diffuse_strength, 0, 255);
-	color.b = clamp((int)rec.rgb.b * (light.rgb.b / 255.0f) * light.br_ratio * diffuse_strength, 0, 255);
+	color.r = clamp((int)obj_color.r * (light.rgb.r / 255.0f) * light.br_ratio * diffuse_strength, 0, 255);
+	color.g = clamp((int)obj_color.g * (light.rgb.g / 255.0f) * light.br_ratio * diffuse_strength, 0, 255);
+	color.b = clamp((int)obj_color.b * (light.rgb.b / 255.0f) * light.br_ratio * diffuse_strength, 0, 255);
 	return (color);
 }
