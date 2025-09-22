@@ -34,7 +34,7 @@ static bool	fill_cy_float(char **tokens, t_sphere *new_sp)
 // sp 0.0,0.0,20.6 12.6 10,0,255
 // ∗ identifier: sp
 // ∗ x,y,z coordinates of the sphere center: 0.0,0.0,20.6
-// ∗ the sphere diameter: 12.6 
+// ∗ the sphere diameter: 12.6
 // ∗ R,G,B colors in range [0-255]: 10, 0, 255
 // the sphere diameter: can not be minus, can not be too big
 bool	validate_parsing_tokens_sp(char **tokens, t_scene *scene)

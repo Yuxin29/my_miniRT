@@ -14,7 +14,8 @@ SRCS := $(SRC_DIR)/main.c \
 		$(SRC_DIR)/parsing/parsing_utils_1.c $(SRC_DIR)/parsing/parsing_utils_2.c \
 		$(SRC_DIR)/render/mlx_window.c $(SRC_DIR)/render/keyboard.c $(SRC_DIR)/render/change_scene.c \
 		$(SRC_DIR)/utils/vector.c\
-		$(SRC_DIR)/raytrace/hit_sphere_plane.c $(SRC_DIR)/raytrace/hit_objects.c \
+		$(SRC_DIR)/raytrace/hit_sphere_plane.c $(SRC_DIR)/raytrace/hit_cylinder.c \
+		$(SRC_DIR)/raytrace/hit_objects.c \
 		$(SRC_DIR)/raytrace/camera_ray.c $(SRC_DIR)/raytrace/handle_light.c \
 		$(SRC_DIR)/raytrace/handle_shadow.c \
 
@@ -27,7 +28,7 @@ MLX_FLAGS := -L$(MLX_DIR)/build -lmlx42 -ldl -lglfw -pthread -lm
 #-L linker search path
 #-l link with library
 
-all: $(LIBFT_LIB) $(MLX_LIB) $(NAME) 
+all: $(LIBFT_LIB) $(MLX_LIB) $(NAME)
 
 $(NAME): $(LIBFT_LIB) $(MLX_LIB) $(OBJS)
 		@$(CC) $(CFLAGS) $(OBJS) $(LIBFT_LIB) $(MLX_FLAGS) -o $(NAME)
