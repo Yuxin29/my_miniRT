@@ -14,7 +14,7 @@ SRCS := $(SRC_DIR)/main.c \
 		$(SRC_DIR)/parsing/parsing_env.c $(SRC_DIR)/parsing/parsing_obj_add.c \
 		$(SRC_DIR)/parsing/parsing_obj_sp.c $(SRC_DIR)/parsing/parsing_obj_pl_cy.c \
 		$(SRC_DIR)/parsing/parsing_utils_1.c $(SRC_DIR)/parsing/parsing_utils_2.c \
-		$(SRC_DIR)/render/mlx_window.c $(SRC_DIR)/render/keyboard.c $(SRC_DIR)/render/update_scene.c \
+		$(SRC_DIR)/render/mlx_window.c $(SRC_DIR)/render/mlx_keyboard.c $(SRC_DIR)/render/mlx_update_scene.c \
 		$(SRC_DIR)/utils/vector1.c $(SRC_DIR)/utils/vector2.c\
 		$(SRC_DIR)/raytrace/hit_sphere_plane.c $(SRC_DIR)/raytrace/hit_cylinder.c \
 		$(SRC_DIR)/raytrace/hit_objects.c $(SRC_DIR)/raytrace/hit_cylinder_utils.c\
