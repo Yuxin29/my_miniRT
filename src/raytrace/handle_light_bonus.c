@@ -7,11 +7,13 @@ static float	get_max(t_light light, t_hit_record rec, t_vec3 pos)
 	t_vec3	reflective_vec;
 	t_vec3	view_vec;
 	t_vec3	light_vec;
+	float	two_nl;
 	float	rv;
 
 	light_vec = vec_normalize(vec_sub(light.l_point, rec.point));
 	view_vec = vec_normalize(vec_sub(pos, rec.point));
-	reflective_vec = vec_sub(vec_scale(rec.normal, 2.0f * vec_dot(rec.normal, light_vec)), light_vec);
+	two_nl = 2.0f * vec_dot(rec.normal, light_vec);
+	reflective_vec = vec_sub(vec_scale(rec.normal, two_nl), light_vec);
 	rv = vec_dot(reflective_vec, view_vec);
 	if (rv < 0.0)
 		rv = 0.0;
@@ -25,7 +27,7 @@ static float	get_max(t_light light, t_hit_record rec, t_vec3 pos)
 // V: vector: ray vec
 // shininess: exponent (controls "sharpness" of highlight, e.g. 16, 32, 64)
 // Ispec = k * light * br * powerpart
-//  res_color.r = clamp(light.rgb.r * light.br_ratio * k * power_part, 0, 255); 	
+// res_color.r = clamp(light.rgb.r * light.br_ratio * k * power_part, 0, 255); 	
 static t_color	apply_specular(t_light light, t_hit_record rec, t_vec3 pos)
 {
 	int		shininess;
@@ -62,14 +64,17 @@ static t_color	apply_specular(t_light light, t_hit_record rec, t_vec3 pos)
 static t_color	apply_checkerboard(t_hit_record rec, t_color original_color)
 {
 	int	x;
-	int	z; 
+	int	z;
 
 	x = floorf(rec.point.x);
 	z = floorf(rec.point.z);
-	if (((abs(x + z)) % 2) == 0)
-		return (original_color);
-	else
-		return (t_color){255 - original_color.r, 255 - original_color.g, 255 - original_color.b}; 
+	if (((abs(x + z)) % 2) != 0)
+	{
+		original_color.r = 255 - original_color.r;
+		original_color.g = 255 - original_color.g;
+		original_color.b = 255 - original_color.b;
+	}
+	return (original_color);
 }
 
 //this one from lin, just need to apply checkerboard color here

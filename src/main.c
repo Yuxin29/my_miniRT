@@ -1,6 +1,6 @@
-#include	"miniRT.h"
+#include "miniRT.h"
 #include "parsing.h"
-#include    "render.h"
+#include "render.h"
 
 // sbj
 // If any misconfiguration of any kind is encountered in the file 
@@ -10,16 +10,16 @@
 // the program must exit properly and return "Error\n"
 // followed by an explicit error message of your choice.
 // in case of errors, msg sent in sice parsing and mlx
+// ft_print_scene(scene); //testing. remove later
 int	main(int ac, char **av)
 {
 	t_scene	*scene;
 
 	scene = parsing(ac, av);
 	if (!scene)
-		return(-1);
-	//ft_print_scene(scene); //testing. remove later
+		return (-1);
 	if (!mlx_window(scene))
-		return (-1); //erro msg sent within mlx window
+		return (-1);
 	return (0);
 }
 

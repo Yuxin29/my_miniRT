@@ -38,7 +38,7 @@ void	change_move(t_scene *scene, t_vec3 move)
 //from the subject
 // Your program must be able to resize the object’s unique properties: 
 // diameter for a sphere and the width and height for a cylinder
-void	change_zoomin(t_scene *scene, float scale)
+void	change_scale(t_scene *scene, float scale)
 {
 	t_object	*cur;
 	t_sphere	*sp;

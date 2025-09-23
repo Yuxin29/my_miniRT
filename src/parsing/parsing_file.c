@@ -58,10 +58,14 @@ static t_scene	*precheck_av(int ac, char **av)
 // in case of error happening in one the the line,
 // print error msg and the error line
 // free the line and screen
-static t_scene	*dealing_line_err(t_scene *scene)
+static t_scene	*dealing_line_err(char *err_msg, t_scene *scene)
 {
-	ft_putstr_fd("Error: Invalid line in the file: ", 1);
-	ft_putchar_fd('\n', 1);
+	if (err_msg)
+	{
+		ft_putstr_fd("Error: ", 1);
+		ft_putstr_fd(err_msg, 1);
+		ft_putchar_fd('\n', 1);
+	}
 	ft_free_scene(scene);
 	return (NULL);
 }
@@ -86,15 +90,12 @@ t_scene	*parsing(int ac, char **av)
 		line = ft_strtrim(raw_line, "\t\r\n");
 		free (raw_line);
 		if (!line)
-		{
-			ft_free_scene(scene);
-			return (NULL);
-		}
+			return (dealing_line_err("ft_strtrim malloc failed", scene));
 		if (!validating_parsing_line(line, scene))
 			scene->line_error = true;
 		free (line);
 	}
 	if (scene->line_error == true)
-		return (dealing_line_err(scene));
+		return (dealing_line_err("error occured during line checking", scene));
 	return (scene);
 }

@@ -46,7 +46,7 @@ static void	scale_keys(mlx_key_data_t keydata, t_scene *scene)
 	if (scale != 0)
 	{
 		scene->need_loop = 1;
-		change_zoomin(scene, scale);
+		change_scale(scene, scale);
 	}
 }
 

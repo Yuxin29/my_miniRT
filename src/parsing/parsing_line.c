@@ -1,6 +1,19 @@
 #include "miniRT.h"
 #include "parsing.h"
 
+static void	delete_mlx(t_scene *scene)
+{
+	if (scene->mlx)
+	{
+		if (scene->img)
+			mlx_delete_image(scene->mlx, scene->img);
+		scene->img = NULL;
+		mlx_terminate(scene->mlx);
+		scene->mlx = NULL;
+	}
+	return ;
+}
+
 void	ft_free_scene(t_scene *scene)
 {
 	t_object	*obj_tmp;
@@ -9,25 +22,22 @@ void	ft_free_scene(t_scene *scene)
 		return ;
 	if (scene->fd >= 0)
 		close(scene->fd);
-	if (scene->mlx)
-	{
-		if (scene->img)
-			mlx_delete_image(scene->mlx, scene->img);
-		mlx_terminate(scene->mlx);
-		scene->img = NULL;
-		scene->mlx = NULL;
-	}
+	scene->fd = -1;
+	delete_mlx(scene);
 	while (scene->objects)
 	{
 		obj_tmp = scene->objects->next;
 		if (scene->objects->data)
+		{
 			free(scene->objects->data);
+			scene->objects->data = NULL;
+		}
 		free(scene->objects);
 		scene->objects = obj_tmp;
 	}
 	scene->objects = NULL;
-	printf("scene freed\n");
 	free(scene);
+	scene = NULL;
 }
 
 //parsing one line
@@ -72,29 +82,6 @@ static bool	validating_line_id_and_nbr(char **tokens)
 	if (ft_strcmp(tokens[0], "cy") == 0 && nbr == 6)
 		return (true);
 	return (false);
-}
-
-bool	add_obj_to_scene(t_scene *scene, t_obj_type type, void *data)
-{
-	t_object	*obj;
-	t_object	*tmp;
-
-	obj = malloc(sizeof(t_object));
-	if (!obj)
-		return (false);
-	obj->type = type;
-	obj->data = data;
-	obj->next = NULL;
-	if (!scene->objects)
-		scene->objects = obj;
-	else
-	{
-		tmp = scene->objects;
-		while (tmp->next)
-			tmp = tmp->next;
-		tmp->next = obj;
-	}
-	return (true);
 }
 
 // sub
