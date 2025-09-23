@@ -122,6 +122,7 @@ bool	add_obj_to_scene(t_scene *scene, t_obj_type type, void *data);
 float	ft_atoi_float(char *str);
 int		count_token_nbr(char **tokens);
 void	free_three_arr(char **vec_1, char **vec_2, char **colors);
+void	normalize_line(char *line);
 //parsing_utils_2.c   5/5
 //fill **str to t_vec and t_color, precheck a str is a valid float
 bool	check_valid_float(char *str);

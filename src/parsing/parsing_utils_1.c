@@ -65,3 +65,17 @@ float	ft_atoi_float(char *str)
 		number = get_decimal((char *)str, number);
 	return (number * sign);
 }
+
+void	normalize_line(char *line)
+{
+	int		i;
+
+	i = 0;
+	while (line[i])
+	{
+		if (line[i] == '\t')
+			line[i] = ' ';
+		i++;
+	}
+	return ;
+}

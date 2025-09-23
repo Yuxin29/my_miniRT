@@ -97,7 +97,8 @@ bool	validating_parsing_line(char *line, t_scene *scene)
 		return (true);
 	if (scene->line_error == true)
 		return (false);
-	tokens = ft_split(line, '\t');
+	normalize_line(line);
+	tokens = ft_split(line, ' ');
 	if (!validating_line_id_and_nbr(tokens))
 	{
 		ft_free_arr(tokens);

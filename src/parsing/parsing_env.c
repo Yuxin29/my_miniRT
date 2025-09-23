@@ -84,11 +84,9 @@ bool	validate_parsing_tokens_l(char **tokens, t_scene *scene)
 		return (false);
 	vec = ft_split(tokens[1], ',');
 	colors = ft_split(tokens[3], ',');
-	if (!do_xyz_vectoy(vec, &scene->light.l_point) || !do_color(colors, &(scene->light.rgb)))
-	{
-		free_three_arr(vec, colors, NULL);
-		return (false);
-	}
+	if (!do_xyz_vectoy(vec, &scene->light.l_point)
+		|| !do_color(colors, &(scene->light.rgb)))
+		return (free_three_arr(vec, colors, NULL), false);
 	free_three_arr(vec, colors, NULL);
 	scene->light.rgb.r = 255;
 	scene->light.rgb.g = 255;
@@ -96,4 +94,3 @@ bool	validate_parsing_tokens_l(char **tokens, t_scene *scene)
 	scene->l_existence = true;
 	return (true);
 }
-
