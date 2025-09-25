@@ -15,6 +15,8 @@
 # define HEIGHT 600
 # define EPSILON 1e-2
 # define _USE_MATH_DEFINES
+# define MOVE_UNIT 0.5
+# define ROTATE_ANGLE 0.2
 
 /* ~~~~~~~~~~~~~~~~~~ TOOL STRUC ~~~~~~~~~~~~~~~~~~ */
 typedef struct s_vec3

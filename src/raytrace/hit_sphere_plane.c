@@ -59,7 +59,12 @@ bool	hit_sphere(t_ray ray, t_sphere *sphere, t_hit_record *rec)
 	return (true);
 }
 
-//line72: how far
+// first check if plane is horizontal to ray,
+// if yes, not hit
+// don: denominator: fenmu
+// rec->t: t= (Po​−O)⋅n​ / d⋅n
+// if (rec->t < EPSILON): ray towards the back directions
+// P=O+t⋅D
 bool	hit_plane(t_ray ray, t_plane *plane, t_hit_record *rec)
 {
 	float	don;

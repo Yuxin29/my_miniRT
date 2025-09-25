@@ -64,6 +64,7 @@ static void	handle_screen_resize(int32_t width, int32_t height, void *param)
 	if (!new)
 	{
 		ft_putstr_fd("Error: resize: mlx_new_image failed\n", 2);
+		scene->running = false;
 		return ;
 	}
 	if (scene->img)

@@ -13,18 +13,16 @@ void	close_window(void *param)
 static void	move_keys(mlx_key_data_t keydata, t_scene *scene)
 {
 	t_vec3	move;
-	float	move_unit;
 
 	move = (t_vec3){0, 0, 0};
-	move_unit = 0.3;
 	if (keydata.key == MLX_KEY_W)
-		move = (t_vec3){0, move_unit, 0};
+		move = (t_vec3){0, MOVE_UNIT, 0};
 	if (keydata.key == MLX_KEY_S)
-		move = (t_vec3){0, -move_unit, 0};
+		move = (t_vec3){0, -MOVE_UNIT, 0};
 	if (keydata.key == MLX_KEY_A)
-		move = (t_vec3){-move_unit, 0, 0};
+		move = (t_vec3){-MOVE_UNIT, 0, 0};
 	if (keydata.key == MLX_KEY_D)
-		move = (t_vec3){move_unit, 0, 0};
+		move = (t_vec3){MOVE_UNIT, 0, 0};
 	if (vec_len(move))
 	{
 		scene->need_loop = 1;
@@ -57,12 +55,12 @@ static void	rotate_keys(mlx_key_data_t keydata, t_scene *scene)
 	if (keydata.key == MLX_KEY_LEFT)
 	{
 		scene->need_loop = 1;
-		change_rotation(scene, y_axis, 0.2);
+		change_rotation(scene, y_axis, ROTATE_ANGLE);
 	}
 	if (keydata.key == MLX_KEY_RIGHT)
 	{
 		scene->need_loop = 1;
-		change_rotation(scene, y_axis, -0.2);
+		change_rotation(scene, y_axis, -ROTATE_ANGLE);
 	}
 }
 
