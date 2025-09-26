@@ -35,10 +35,7 @@ static void	change_move_objs(t_scene *scene, t_vec3 move)
 void	change_move(t_scene *scene, t_vec3 move)
 {
 	if (scene->cam_move)
-	{
 		scene->cam.v_point = vec_add(scene->cam.v_point, move);
-		//init_viewport(scene); do I need to ? I dont think so, the need loop should have been set to 1
-	}
 	else
 		change_move_objs(scene, move);
 }

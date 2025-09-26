@@ -178,9 +178,6 @@ typedef struct s_scene
 }	t_scene;
 
 /* ~~~~~~~~~~~~~~~~~~ RENDERING STRUC ~~~~~~~~~~~~~~~~~~ */
-
-
-
 typedef struct s_hit_sphere_info
 {
 	t_vec3	oc;

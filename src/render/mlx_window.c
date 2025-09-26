@@ -4,9 +4,8 @@
 //0xAAFF1111, rgb + Transparency
 static void	render_scene(t_scene *scene)
 {
-	int				x;
-	int				y;
-	//t_render_data	data;
+	int	x;
+	int	y;
 
 	init_viewport(scene);
 	y = 0;
@@ -20,7 +19,8 @@ static void	render_scene(t_scene *scene)
 			{
 				scene->c = final_color(scene, scene->rec);
 				mlx_put_pixel(scene->img, x, y,
-					(scene->c.r << 24 | scene->c.g << 16 | scene->c.b << 8 | 255));
+					(scene->c.r << 24 | scene->c.g << 16
+						| scene->c.b << 8 | 255));
 			}
 			else
 				mlx_put_pixel(scene->img, x, y, 0x000000FF);

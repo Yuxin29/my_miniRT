@@ -62,7 +62,8 @@ void	init_viewport(t_scene *scene)
 	scene->view.camera_origin = scene->cam.v_point;
 	scene->view.forward = vec_normalize(scene->cam.v_orien);
 	init_camera_frame(&scene->cam, &scene->view.right, &scene->view.up);
-	center = vec_add(scene->view.camera_origin, vec_scale(scene->view.forward, 1.0f));
+	center = vec_add(scene->view.camera_origin,
+			vec_scale(scene->view.forward, 1.0f));
 	scene->view.viewport_origin = center;
 	scene->view.viewport_origin = vec_add(scene->view.viewport_origin,
 			vec_scale(scene->view.up, scene->view.viewport_height / 2.0f));
