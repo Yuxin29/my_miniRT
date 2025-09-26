@@ -44,7 +44,6 @@ void	init_camera_frame(t_camera	*cam, t_vec3 *right, t_vec3 *up)
 sin(θ) = Opposite / Hypotenuse
 cos(θ) = Adjacent / Hypotenuse
 tan(θ) = Opposite / Adjacent
-
 center = cam->position + forward * 1.0
 viewport_origin = center
 	+ up * (viewport_height / 2)//move up

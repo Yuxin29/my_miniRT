@@ -1,15 +1,13 @@
 #ifndef MINIRT_H
 # define MINIRT_H
 
-//self_defined header
 # include "../libft/libft.h"
 # include "MLX42/MLX42.h"
 
-//lib headers
 # include <stdlib.h>
 # include <stdio.h>
 # include <math.h>
-# include <fcntl.h>      //open 
+# include <fcntl.h>
 
 # define WIDTH 800
 # define HEIGHT 600
@@ -82,7 +80,7 @@ typedef struct s_light
 typedef struct s_sphere
 {
 	t_vec3		sp_center;
-	float		radius; // lin modify
+	float		radius;
 	t_color		rgb;
 }	t_sphere;
 
@@ -221,7 +219,6 @@ float	vec_len(t_vec3 a);
 t_vec3	vec_normalize(t_vec3 v);
 float	vec_dot(t_vec3 a, t_vec3 b);
 t_vec3	vec_cross(t_vec3 a, t_vec3 b);
-
 /* ~~~~~~~~~~~~~~~~~~ PARSING ~~~~~~~~~~~~~~~~~~ */
 //parsing_file.c          4/5
 t_scene	*parsing(int ac, char **av);
@@ -238,7 +235,7 @@ bool	validate_parsing_tokens_sp(char **tokens, t_scene *scene);
 //parsing_obj_2.c     5/5	plane and cylinder
 bool	validate_parsing_tokens_pl(char **tokens, t_scene *scene);
 bool	validate_parsing_tokens_cy(char **tokens, t_scene *scene);
-//parsing_utils_1.c   3/5	str helpers
+//parsing_utils_1.c   4/5	str helpers
 float	ft_atoi_float(char *str);
 int		count_token_nbr(char **tokens);
 void	free_three_arr(char **vec_1, char **vec_2, char **colors);
@@ -248,7 +245,6 @@ bool	check_valid_float(char *str);
 bool	do_color(char **colors, t_color *rgb);
 bool	do_normalized_vectoy(char **vec, t_vec3 *vec_nor);
 bool	do_xyz_vectoy(char **vec, t_vec3 *vec_xyz);
-
 /* ~~~~~~~~~~~~~~~~~~ RAY_tracing ~~~~~~~~~~~~~~~~~~ */
 //cemera_ray.c
 t_vec3	vec3(float x, float y, float z);
@@ -274,7 +270,6 @@ t_color	get_color_from_object(t_object *obj);
 t_color	final_color(t_scene *scene, t_hit_record rec);
 //handle_shadow
 bool	is_in_shadow(t_hit_record rec, t_light light, t_object *obj);
-
 /* ~~~~~~~~~~~~~~~~~~ MLX ~~~~~~~~~~~~~~~~~~ */
 //mlx_window.c			4/5
 bool	mlx_window(t_scene *scene);
