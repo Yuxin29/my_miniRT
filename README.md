@@ -22,7 +22,7 @@
 
 1. Navigate to the project directory:  
 ```
-bash
+git clone https://github.com/Yuxin29/my_miniRT.git miniRT
 cd miniRT
 ```
     
@@ -53,5 +53,6 @@ Example:
   - Cylinder: cy x,y,z dirX,dirY,dirZ diameter height r,g,b
 - All coordinates, directions, and colors must be valid numbers.
 - The program will ignore malformed lines and print errors if necessary.
+
 
 
