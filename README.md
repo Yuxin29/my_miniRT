@@ -1,4 +1,4 @@
-# miniRT
+# MiniRayTracer(miniRT)
 
 **miniRT** is a simplified 3D raytracer project from the 42 curriculum. The program reads a scene description from a file, parses objects, lights, and camera information, and renders a 3D image using ray tracing. It supports spheres, planes, cylinders, lights, shadows, reflections, and basic camera controls.  
 
@@ -53,6 +53,7 @@ Example:
   - Cylinder: cy x,y,z dirX,dirY,dirZ diameter height r,g,b
 - All coordinates, directions, and colors must be valid numbers.
 - The program will ignore malformed lines and print errors if necessary.
+
 
 
 
